@@ -1,0 +1,12 @@
+.tool-header
+  .container
+    .tool-header__breadcrumb
+      a(href='/') Domů
+      span.tool-header__sep /
+      a(href='/nastroje') Nástroje
+      if toolCategory
+        span.tool-header__sep /
+        a(href=toolCategoryPath)= toolCategory
+    h1.tool-header__title= title
+    if toolDescription
+      p.tool-header__description= toolDescription

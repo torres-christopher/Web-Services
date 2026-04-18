@@ -1,0 +1,103 @@
+extends ../../layouts/main
+
+block content
+  .legal-page
+    .container
+      .legal-page__header
+        h1.legal-page__title Kontakt
+        p.legal-page__meta Máte dotaz nebo narazili jste na chybu?
+
+      .legal-page__body
+
+        .contact-grid
+
+          .contact-info
+            section.legal-section
+              h2 O webu
+              p
+                | #{siteName} je bezplatný web s českými online nástroji pro text,
+                | kalkulačky, konverze souborů a česká data.
+              p
+                | Web provozuje fyzická osoba podnikající na základě živnostenského
+                | oprávnění se sídlem v České republice.
+
+            section.legal-section
+              h2 Kdy nás kontaktovat
+              ul
+                li narazili jste na chybu v některém nástroji
+                li výsledek kalkulačky se zdá nesprávný
+                li máte nápad na nový nástroj
+                li dotazy k ochraně osobních údajů nebo podmínkám použití
+                li hlášení nevhodného obsahu reklam
+
+            section.legal-section
+              h2 Ostatní stránky
+              ul
+                li: a(href='/privacy') Ochrana osobních údajů
+                li: a(href='/terms') Podmínky použití
+
+          .contact-form-wrap
+            h2 Napište nám
+            if success
+              .alert.alert--success
+                | Zpráva byla odeslána. Odpovíme co nejdříve.
+            else
+              form.contact-form(method='POST' action='/contact')
+                .form-group
+                  label.form-label(for='name') Jméno
+                  input.form-input(
+                    type='text'
+                    id='name'
+                    name='name'
+                    placeholder='Vaše jméno'
+                    value=formData && formData.name || ''
+                    required
+                    autocomplete='name'
+                  )
+
+                .form-group
+                  label.form-label(for='email') E-mail
+                  input.form-input(
+                    type='email'
+                    id='email'
+                    name='email'
+                    placeholder='vas@email.cz'
+                    value=formData && formData.email || ''
+                    required
+                    autocomplete='email'
+                  )
+
+                .form-group
+                  label.form-label(for='subject') Předmět
+                  select.form-select(id='subject' name='subject')
+                    option(value='' disabled selected) Vyberte předmět
+                    option(
+                      value='bug'
+                      selected=formData && formData.subject === 'bug'
+                    ) Chyba v nástroji
+                    option(
+                      value='idea'
+                      selected=formData && formData.subject === 'idea'
+                    ) Nápad na nový nástroj
+                    option(
+                      value='privacy'
+                      selected=formData && formData.subject === 'privacy'
+                    ) Ochrana osobních údajů
+                    option(
+                      value='other'
+                      selected=formData && formData.subject === 'other'
+                    ) Jiné
+
+                .form-group
+                  label.form-label(for='message') Zpráva
+                  textarea.form-textarea(
+                    id='message'
+                    name='message'
+                    placeholder='Popište váš dotaz nebo problém...'
+                    rows='6'
+                    required
+                  )= formData && formData.message || ''
+                  if errors && errors.message
+                    p.form-error= errors.message
+
+                button.btn.btn--primary(type='submit') Odeslat zprávu

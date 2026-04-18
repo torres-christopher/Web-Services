@@ -27,6 +27,11 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }))
 // Locals must be before routers
 app.use(localsMiddleware)
 
+// Main
+app.get('/', (req, res) => {
+  res.json({})
+})
+
 // Health
 app.get('/health', (req, res) => {
   res.json({

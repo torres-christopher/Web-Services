@@ -1,0 +1,116 @@
+extends ../layouts/main
+
+block content
+  //- Hero
+  section.hero
+    .container
+      .hero__inner
+        .hero__text
+          h1.hero__title
+            | Bezplatné české
+            br
+            span.hero__title-accent online nástroje
+          p.hero__subtitle Více než 100 nástrojů pro text, PDF, obrázky, kalkulačky a česká data. Zdarma, bez registrace.
+          .hero__actions
+            a.btn.btn--primary.btn--lg(href='/nastroje') Procházet nástroje
+            a.btn.btn--ghost.btn--lg(href='#oblibene') Nejoblíbenější
+        .hero__visual
+          .hero__grid-preview(aria-hidden='true')
+            .hero__pill Počet znaků
+            .hero__pill JSON validator
+            .hero__pill BMI kalkulačka
+            .hero__pill IBAN kalkulačka
+            .hero__pill Převod měn
+            .hero__pill QR kód
+            .hero__pill Rodné číslo
+            .hero__pill Pracovní dny
+
+  //- Category strip
+  .category-strip
+    .container
+      .category-strip__list
+        a.category-chip(href='/nastroje#text')
+          span.category-chip__icon ✏️
+          span Text
+        a.category-chip(href='/nastroje#dev')
+          span.category-chip__icon ⌨️
+          span Vývojáři
+        a.category-chip(href='/nastroje#czech')
+          span.category-chip__icon 🇨🇿
+          span Česky
+        a.category-chip(href='/nastroje#datum')
+          span.category-chip__icon 📅
+          span Datum & čas
+        a.category-chip(href='/nastroje#zdravi')
+          span.category-chip__icon 💪
+          span Zdraví
+        a.category-chip(href='/nastroje#prevodnik')
+          span.category-chip__icon 🔄
+          span Převodníky
+        a.category-chip(href='/nastroje#obrazky')
+          span.category-chip__icon 🖼️
+          span Obrázky
+        a.category-chip(href='/nastroje#pdf')
+          span.category-chip__icon 📄
+          span PDF
+
+  //- Featured tools
+  section.featured-tools(id='oblibene')
+    .container
+      .section-header
+        h2.section-title Nejoblíbenější nástroje
+        a.section-link(href='/nastroje') Zobrazit vše →
+      .tools-grid
+        a.tool-card(href='/pocet-znaku')
+          .tool-card__icon ✏️
+          .tool-card__body
+            h3.tool-card__name Počet znaků
+            p.tool-card__desc Spočítejte znaky, slova, řádky a odstavce v textu.
+          .tool-card__tag Text
+        a.tool-card(href='/json-validator')
+          .tool-card__icon ⌨️
+          .tool-card__body
+            h3.tool-card__name JSON validator
+            p.tool-card__desc Ověřte, naformátujte nebo minifikujte JSON data.
+          .tool-card__tag Vývojáři
+        a.tool-card(href='/bmi-kalkulator')
+          .tool-card__icon 💪
+          .tool-card__body
+            h3.tool-card__name BMI kalkulačka
+            p.tool-card__desc Vypočítejte index tělesné hmotnosti podle výšky a váhy.
+          .tool-card__tag Zdraví
+        a.tool-card(href='/iban-kalkulator')
+          .tool-card__icon 🏦
+          .tool-card__body
+            h3.tool-card__name IBAN kalkulačka
+            p.tool-card__desc Převeďte české číslo účtu na IBAN nebo ověřte platnost.
+          .tool-card__tag Česky
+        a.tool-card(href='/prevod-men')
+          .tool-card__icon 💱
+          .tool-card__body
+            h3.tool-card__name Převod měn
+            p.tool-card__desc Kurzy ČNB v reálném čase. CZK, EUR, USD a další.
+          .tool-card__tag Česky
+        a.tool-card(href='/qr-kod-generator')
+          .tool-card__icon 📱
+          .tool-card__body
+            h3.tool-card__name QR kód generátor
+            p.tool-card__desc Vygenerujte QR kód pro URL, text, Wi-Fi nebo kontakt.
+          .tool-card__tag Vývojáři
+
+  //- Trust strip
+  .trust-strip
+    .container
+      .trust-strip__list
+        .trust-item
+          strong 100+
+          span Nástrojů
+        .trust-item
+          strong Zdarma
+          span Bez registrace
+        .trust-item
+          strong Česky
+          span Lokální data
+        .trust-item
+          strong Bezpečně
+          span Data nezpracováváme
