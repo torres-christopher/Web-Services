@@ -1,47 +1,54 @@
-// Custom HTTP codes
-export const HttpStatus = {
-  OK: 200,
-  CREATED: 201,
-  BAD_REQUEST: 400,
-  UNAUTHORISED: 401,
-  FORBIDDEN: 403,
-  NOT_FOUND: 404,
-  UNPROCESSABLE_ENTITY: 422,
-  TOO_MANY_REQUESTS: 429,
-  INTERNAL_SERVER_ERROR: 500,
-  BAD_GATEWAY: 502,
-} as const
+import type { Request, Response, NextFunction } from 'express'
+import { isAppError, HttpStatus } from '../shared/types/errors.js'
+import { env } from '../config/env.js'
 
-// Export the type
-export type HttpStatusCode = (typeof HttpStatus)[keyof typeof HttpStatus]
+export const errorHandler = (
+  err: unknown,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
+  // Check if operation error thrown on purpose
+  if (isAppError(err)) {
+    const statusCode = err.statusCode
 
-// AppError class
-export class AppError extends Error {
-  public readonly statusCode: HttpStatusCode
-  public readonly isOperational: boolean
-
-  constructor(
-    message: string,
-    statusCode: HttpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR,
-    isOperational = true,
-  ) {
-    super(message)
-
-    // So TS checks for Error no AppError
-    Object.setPrototypeOf(this, new.target.prototype)
-
-    this.name = this.constructor.name
-    this.statusCode = statusCode
-    this.isOperational = isOperational
-
-    // Captures the stack trace, excluding the constructor itself
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor)
+    if (statusCode >= 500) {
+      console.error(`[AppError] ${statusCode}: ${err.message}`)
     }
+
+    res.status(statusCode).render('errors/error', {
+      title: getTitleForStatus(statusCode),
+      metaDescription: 'Došlo k chybě.',
+      statusCode,
+      message: statusCode < 500 ? err.message : 'Došlo k neočekávané chybě.',
+      stack: env.NODE_ENV === 'development' ? err.stack : null, // Only show stack trace in development
+    })
+    return
   }
+
+  // Unexpected error, no details for user
+  console.error('[UnexpectedError]', err)
+
+  res.status(HttpStatus.INTERNAL_SERVER_ERROR).render('errors/error', {
+    title: 'Chyba serveru',
+    metaDescription: 'Došlo k neočekávané chybě.',
+    statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+    message: 'Došlo k neočekávané chybě. Zkuste to prosím znovu.',
+    stack: env.NODE_ENV === 'development' && err instanceof Error ? err.stack : null,
+  })
 }
 
-// Typeguard for unknown errors
-export const isAppError = (err: unknown): err is AppError => {
-  return err instanceof AppError
+// Status helper
+const getTitleForStatus = (statusCode: number): string => {
+  const titles: Record<number, string> = {
+    400: 'Neplatný požadavek',
+    401: 'Přístup odepřen',
+    403: 'Zakázáno',
+    404: 'Stránka nenalezena',
+    422: 'Neplatná data',
+    429: 'Příliš mnoho požadavků',
+    500: 'Chyba serveru',
+    502: 'Chyba brány',
+  }
+  return titles[statusCode] ?? 'Chyba'
 }
