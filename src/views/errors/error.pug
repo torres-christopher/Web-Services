@@ -1,12 +1,11 @@
-extends ../layouts/main
-
-block content
-  .error-page
+doctype html
+html
+  head
+    title= title
+  body
     h1= statusCode
     h2= title
     p= message
-
     if stack
-      pre.error-stack= stack
-
+      pre= stack
     a(href='/') Zpět na hlavní stránku
