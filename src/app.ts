@@ -15,7 +15,7 @@ const app = express()
 
 // Initialise Pug templates
 app.set('view engine', 'pug')
-app.set('views', join(__dirname, '../src/views'))
+app.set('views', join(__dirname, '../views'))
 
 // Static files
 app.use(express.static(join(__dirname, '../public')))
