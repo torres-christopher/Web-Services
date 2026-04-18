@@ -1,0 +1,9 @@
+if faq && faq.length
+  section.tool-faq
+    .container
+      h2.tool-faq__heading Časté dotazy
+      .tool-faq__list
+        each item in faq
+          details.tool-faq__item
+            summary.tool-faq__question= item.question
+            p.tool-faq__answer= item.answer

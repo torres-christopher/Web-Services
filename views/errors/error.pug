@@ -1,0 +1,16 @@
+extends ../layouts/main
+
+block content
+  .error-page
+    .container
+      .error-page__inner
+        .error-page__code= statusCode
+        h1.error-page__title= title
+        p.error-page__message= message
+        if stack
+          details.error-page__stack
+            summary Technické podrobnosti
+            pre= stack
+        .error-page__actions
+          a.btn.btn--primary(href='/') Zpět na hlavní stránku
+          a.btn.btn--ghost(href='/nastroje') Procházet nástroje

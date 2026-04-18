@@ -1,0 +1,83 @@
+doctype html
+html(lang='cs')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+
+    //- SEO
+    title= title ? `${title} — ${siteName}` : siteName
+    meta(name='description' content=metaDescription || '')
+    if canonicalPath
+      link(rel='canonical' href=`${siteUrl}${canonicalPath}`)
+
+    //- Open Graph
+    meta(property='og:type' content='website')
+    meta(property='og:title' content=title || siteName)
+    meta(property='og:description' content=metaDescription || '')
+    meta(property='og:url' content=`${siteUrl}${canonicalPath || ''}`)
+    meta(property='og:site_name' content=siteName)
+    meta(property='og:image' content=`${siteUrl}/images/og-default.png`)
+
+    //- Favicon
+    link(rel='icon' type='image/ico' href='/images/favicon.ico')
+
+    //- Styles
+    link(rel='stylesheet' href='/css/main.css')
+
+    //- Google Analytics
+    if gaMeasurementId
+      script(async src=`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`)
+      script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '#{gaMeasurementId}', { anonymize_ip: true });
+
+  body
+    include ../partials/cookie-banner
+
+    header.site-header
+      .container
+        .site-header__inner
+          a.site-logo(href='/')
+            span.site-logo__mark MW
+            span.site-logo__name= siteName
+          include ../partials/nav
+          button.nav-toggle(aria-label='Otevřít menu' aria-expanded='false')
+            span
+            span
+            span
+
+    main.site-main
+      block content
+
+    footer.site-footer
+      .container
+        .site-footer__grid
+          .site-footer__brand
+            a.site-logo.site-logo--footer(href='/')
+              span.site-logo__mark MW
+              span.site-logo__name= siteName
+            p.site-footer__tagline Bezplatné české online nástroje
+          .site-footer__links
+            h4.site-footer__heading Nástroje
+            ul
+              li: a(href='/nastroje') Všechny nástroje
+              li: a(href='/pocet-znaku') Počet znaků
+              li: a(href='/json-validator') JSON validator
+              li: a(href='/bmi-kalkulator') BMI kalkulačka
+          .site-footer__links
+            h4.site-footer__heading Informace
+            ul
+              li: a(href='/privacy') Ochrana soukromí
+              li: a(href='/terms') Podmínky použití
+              li: a(href='/contact') Kontakt
+        .site-footer__bottom
+          p &copy; #{currentYear} #{siteName}. Všechna práva vyhrazena.
+          p.site-footer__disclaimer Nástroje jsou poskytovány „tak jak jsou" pouze pro informační účely.
+
+    //- AdSense
+    if adsenseClientId
+      script(async src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}` crossorigin='anonymous')
+
+    script(src='/js/main.js')
