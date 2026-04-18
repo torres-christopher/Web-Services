@@ -7,8 +7,8 @@ const server = app.listen(env.PORT, () => {
   │                                         │
   │   Web Services running                  │
   │                                         │
-  │   Local:  http://localhost:${env.PORT}  │
-  │   Env:    ${env.NODE_ENV}               │
+  │   Local:  http://localhost:${env.PORT}         │
+  │   Env:    ${env.NODE_ENV}                   │
   │                                         │
   └─────────────────────────────────────────┘
   `)
