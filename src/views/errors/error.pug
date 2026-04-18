@@ -1,0 +1,12 @@
+extends ../layouts/main
+
+block content
+  .error-page
+    h1= statusCode
+    h2= title
+    p= message
+
+    if stack
+      pre.error-stack= stack
+
+    a(href='/') Zpět na hlavní stránku

@@ -4,9 +4,9 @@ import { env } from '../config/env.js'
 
 export const errorHandler = (
   err: unknown,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ): void => {
   // Check if operation error thrown on purpose
   if (isAppError(err)) {
