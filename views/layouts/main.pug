@@ -10,13 +10,18 @@ html(lang='cs')
     if canonicalPath
       link(rel='canonical' href=`${siteUrl}${canonicalPath}`)
 
+    //- Structured data
+    if jsonLd
+      script(type='application/ld+json')
+        | !{JSON.stringify(jsonLd)}
+
     //- Open Graph
     meta(property='og:type' content='website')
-    meta(property='og:title' content=title || siteName)
-    meta(property='og:description' content=metaDescription || '')
+    meta(property='og:title' content=ogTitle || title)
+    meta(property='og:description' content=ogDescription || metaDescription)
     meta(property='og:url' content=`${siteUrl}${canonicalPath || ''}`)
     meta(property='og:site_name' content=siteName)
-    meta(property='og:image' content=`${siteUrl}/images/og-default.png`)
+    meta(property='og:image' content=ogImage || `${siteUrl}/images/og-default.png`)
 
     //- Favicon
     link(rel='icon' type='image/ico' href='/images/favicon.ico')
