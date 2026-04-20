@@ -1,0 +1,35 @@
+import { catchAsync } from '../../../shared/utils/catchAsync.js'
+import { buildSeoMeta } from '../../../shared/utils/seo.js'
+
+// Contact page
+export const getContact = catchAsync(async (req, res) => {
+  res.render('pages/legal/contact', {
+        ...buildSeoMeta({
+    title: 'Kontakt',
+    description: 'Kontaktujte nás — hlášení chyb, nápady na nástroje, dotazy k ochraně soukromí.',
+    path: '/contact',
+    }),
+  })
+})
+
+// Privacy page
+export const getPrivacy = catchAsync(async (req, res) => {
+  res.render('pages/legal/privacy', {
+    ...buildSeoMeta({
+    title: 'Ochrana osobních údajů',
+    description: 'Zásady ochrany osobních údajů webu XXX.cz. Informace o cookies, trackování a zpracování dat.', // TODO: web name
+    path: '/privacy',
+    }),
+  })
+})
+
+// Terms page
+export const getTerms = catchAsync(async (req, res) => {
+  res.render('pages/legal/terms', {
+    ...buildSeoMeta({
+    title: 'Podmínky použití',
+    description: 'Podmínky použití bezplatných online nástrojů na webu XXX.cz.', // TODO: web name
+    path: '/terms',
+    }),
+  })
+})

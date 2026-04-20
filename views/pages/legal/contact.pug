@@ -8,43 +8,49 @@ block content
         p.legal-page__meta Máte dotaz nebo narazili jste na chybu?
 
       .legal-page__body
-
         .contact-grid
 
           .contact-info
             section.legal-section
               h2 O webu
               p
-                | #{siteName} je bezplatný web s českými online nástroji pro text,
-                | kalkulačky, konverze souborů a česká data.
+                | #{siteName} je bezplatný web s českými online nástroji
+                | pro text, kalkulačky, konverze souborů a česká data.
+                | Všechny nástroje jsou zdarma a nevyžadují registraci.
               p
-                | Web provozuje fyzická osoba podnikající na základě živnostenského
-                | oprávnění se sídlem v České republice.
+                | Web provozuje fyzická osoba podnikající na základě
+                | živnostenského oprávnění se sídlem v České republice.
 
             section.legal-section
               h2 Kdy nás kontaktovat
               ul
-                li narazili jste na chybu v některém nástroji
+                li narazili jste na chybu nebo nesprávný výsledek nástroje
                 li výsledek kalkulačky se zdá nesprávný
-                li máte nápad na nový nástroj
+                li máte nápad na nový nástroj nebo vylepšení
                 li dotazy k ochraně osobních údajů nebo podmínkám použití
                 li hlášení nevhodného obsahu reklam
+                li žádosti o výmaz osobních údajů (GDPR)
 
             section.legal-section
-              h2 Ostatní stránky
+              h2 Další dokumenty
               ul
-                li: a(href='/privacy') Ochrana osobních údajů
-                li: a(href='/terms') Podmínky použití
+                li: a(href='/ochrana-osobnich-udaju') Ochrana osobních údajů
+                li: a(href='/podminky-pouziti') Podmínky použití
 
           .contact-form-wrap
             h2 Napište nám
             if success
               .alert.alert--success
-                | Zpráva byla odeslána. Odpovíme co nejdříve.
+                | ✓ Zpráva byla odeslána. Odpovíme co nejdříve, obvykle do 2 pracovních dnů.
             else
-              form.contact-form(method='POST' action='/contact')
+              if errors && errors.general
+                .alert.alert--error= errors.general
+
+              form.contact-form(method='POST' action='/kontakt')
                 .form-group
                   label.form-label(for='name') Jméno
+                  if errors && errors.name
+                    p.form-error= errors.name
                   input.form-input(
                     type='text'
                     id='name'
@@ -56,7 +62,9 @@ block content
                   )
 
                 .form-group
-                  label.form-label(for='email') E-mail
+                  label.form-label(for='email') E-mailová adresa
+                  if errors && errors.email
+                    p.form-error= errors.email
                   input.form-input(
                     type='email'
                     id='email'
@@ -82,7 +90,11 @@ block content
                     option(
                       value='privacy'
                       selected=formData && formData.subject === 'privacy'
-                    ) Ochrana osobních údajů
+                    ) Ochrana osobních údajů / GDPR
+                    option(
+                      value='ads'
+                      selected=formData && formData.subject === 'ads'
+                    ) Nevhodný obsah reklamy
                     option(
                       value='other'
                       selected=formData && formData.subject === 'other'
@@ -90,14 +102,16 @@ block content
 
                 .form-group
                   label.form-label(for='message') Zpráva
+                  if errors && errors.message
+                    p.form-error= errors.message
                   textarea.form-textarea(
                     id='message'
                     name='message'
-                    placeholder='Popište váš dotaz nebo problém...'
+                    placeholder='Popište váš dotaz nebo problém co nejpodrobněji...'
                     rows='6'
                     required
                   )= formData && formData.message || ''
-                  if errors && errors.message
-                    p.form-error= errors.message
 
-                button.btn.btn--primary(type='submit') Odeslat zprávu
+                .form-group
+                  button.btn.btn--primary(type='submit') Odeslat zprávu
+                  p.form-hint Odpovídáme obvykle do 2 pracovních dnů.
