@@ -7,7 +7,7 @@ export const getContact = catchAsync(async (req, res) => {
         ...buildSeoMeta({
     title: 'Kontakt',
     description: 'Kontaktujte nás — hlášení chyb, nápady na nástroje, dotazy k ochraně soukromí.',
-    path: '/contact',
+    path: '/kontakt',
     }),
   })
 })
@@ -18,7 +18,7 @@ export const getPrivacy = catchAsync(async (req, res) => {
     ...buildSeoMeta({
     title: 'Ochrana osobních údajů',
     description: 'Zásady ochrany osobních údajů webu XXX.cz. Informace o cookies, trackování a zpracování dat.', // TODO: web name
-    path: '/privacy',
+    path: '/ochrana-osobnich-udaju',
     }),
   })
 })
@@ -29,7 +29,7 @@ export const getTerms = catchAsync(async (req, res) => {
     ...buildSeoMeta({
     title: 'Podmínky použití',
     description: 'Podmínky použití bezplatných online nástrojů na webu XXX.cz.', // TODO: web name
-    path: '/terms',
+    path: '/podminky-pouziti',
     }),
   })
 })

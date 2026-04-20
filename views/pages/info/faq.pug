@@ -1,0 +1,133 @@
+extends ../../layouts/main
+
+block content
+  .faq-page
+    .container
+      .faq-page__header
+        p.section-eyebrow Nápověda
+        h1.faq-page__title Časté dotazy
+        p.faq-page__subtitle
+          | Odpovídáme na nejčastější otázky o fungování nástrojů, ochraně soukromí,
+          | přesnosti dat a dostupnosti API.
+
+      .faq-page__body
+
+        .faq-category
+          p.faq-category__title Obecné
+
+          .faq-list
+            details.faq-item
+              summary.faq-question Je použití nástrojů skutečně zdarma?
+              p.faq-answer
+                | Ano, všechny nástroje jsou zcela bezplatné a nevyžadují žádnou registraci
+                | ani zadání platebního údaje. Web je financován reklamou Google AdSense.
+                | Pokud vám reklamy vadí, podpořte nás sdílením nástrojů, které používáte.
+
+            details.faq-item
+              summary.faq-question Fungují nástroje na mobilním telefonu?
+              p.faq-answer
+                | Ano. Všechny nástroje jsou optimalizované pro mobilní zařízení od šíře 320 px
+                | výše. Nahrávání souborů funguje na mobilu stejně jako na desktopu.
+
+            details.faq-item
+              summary.faq-question Mohu nástroje používat pro komerční účely?
+              p.faq-answer
+                | Ano, nástroje lze používat v komerčním prostředí bez omezení. Jsou dostupné
+                | jako webová aplikace. Pokud potřebujete programový přístup, vybrané nástroje
+                | nabízejí REST API — viz sekce Pro vývojáře níže.
+
+            details.faq-item
+              summary.faq-question Jak hlásím chybu nebo navrhuji nový nástroj?
+              p.faq-answer
+                | Použijte&nbsp;
+                a(href='/kontakt') kontaktní formulář
+                | . Přijímáme hlášení chyb i nápady na nové nástroje.
+                | Odpovídáme obvykle do dvou pracovních dnů.
+
+        .faq-category
+          p.faq-category__title Soukromí a data
+
+          .faq-list
+            details.faq-item
+              summary.faq-question Co se děje s daty a soubory, které nahraji?
+              p.faq-answer
+                | Data zadaná do textových nástrojů a kalkulaček jsou zpracována výhradně
+                | v operační paměti serveru pro účely daného nástroje. Soubory nahrané pro
+                | zpracování (PDF, obrázky) jsou po odeslání výsledku okamžitě smazány.
+                | Nic neukládáme, neanalyzujeme ani nesdílíme. Více v&nbsp;
+                a(href='/ochrana-osobnich-udaju') zásadách ochrany soukromí
+                | .
+
+            details.faq-item
+              summary.faq-question Jaké cookies web používá?
+              p.faq-answer
+                | Používáme pouze analytické cookies Google Analytics — a pouze s vaším
+                | souhlasem. Bez souhlasu žádné analytické cookies neprobíhají. Technické
+                | cookies nezbytné pro provoz webu jsou vždy aktivní.
+
+            details.faq-item
+              summary.faq-question Jsou mé texty a vstupy ukládány?
+              p.faq-answer
+                | Ne. Texty zadané do nástrojů nejsou ukládány na server ani do databáze.
+                | Zpracování probíhá synchronně v paměti a po vrácení výsledku jsou data zahozena.
+
+        .faq-category
+          p.faq-category__title Přesnost a zdroje dat
+
+          .faq-list
+            details.faq-item
+              summary.faq-question Jsou výsledky kalkulaček přesné?
+              p.faq-answer
+                | Finanční nástroje (kurzy, IBAN) čerpají z oficiálních zdrojů — České národní
+                | banky a registru ARES. Zdravotní kalkulačky používají uznávané vzorce
+                | (Mifflin-St Jeor pro BMR, Navy metoda pro tuk v těle apod.).
+                | Všechny výsledky jsou orientační a nenahrazují odborné poradenství.
+
+            details.faq-item
+              summary.faq-question Kde se berou data pro kurzy ČNB?
+              p.faq-answer
+                | Kurzy měn načítáme přímo z veřejného API České národní banky. ČNB
+                | publikuje středový kurz každý pracovní den kolem 14:30. Data cachujeme
+                | denně — vždy zobrazujeme datum a čas poslední aktualizace.
+
+            details.faq-item
+              summary.faq-question Jak aktuální jsou data z ARES?
+              p.faq-answer
+                | Údaje o firmách pocházejí z registru ARES (Administrativní registr
+                | ekonomických subjektů), který provozuje Ministerstvo financí ČR.
+                | ARES data jsou dotazována v reálném čase přímo při vyhledávání.
+
+            details.faq-item
+              summary.faq-question Zdravotní kalkulačky — jsou přesné?
+              p.faq-answer
+                | Zdravotní kalkulačky (BMI, BMR, TDEE, tělesný tuk apod.) slouží výhradně
+                | pro informační účely a nenahrazují lékařskou konzultaci. Vždy se poraďte
+                | s kvalifikovaným zdravotnickým pracovníkem pro individuální doporučení.
+
+        .faq-category
+          p.faq-category__title Pro vývojáře
+
+          .faq-list
+            details.faq-item
+              summary.faq-question Existuje API pro programový přístup?
+              p.faq-answer
+                | Aktuálně nabízíme REST API pro generátor QR kódů na adrese&nbsp;
+                code GET /api/v1/qr
+                | &nbsp;a&nbsp;
+                code POST /api/v1/qr
+                | . Plánujeme rozšíření API i pro další nástroje (obrazky, IBAN, kurzy).
+                | Pokud máte konkrétní potřebu, napište přes&nbsp;
+                a(href='/kontakt') kontaktní formulář
+                | .
+
+            details.faq-item
+              summary.faq-question Jaké jsou limity API?
+              p.faq-answer
+                | V aktuální verzi platí rate limiting na úrovni IP adresy — 100 požadavků
+                | za 15 minut. Pro vyšší limity nebo komerční použití nás kontaktujte.
+
+            details.faq-item
+              summary.faq-question Mohu vkládat nástroje do vlastního webu (iframe)?
+              p.faq-answer
+                | Aktuálně iframe vkládání nepodporujeme. Doporučujeme odkazovat přímo
+                | na konkrétní nástroj. Pro integraci formou API nás kontaktujte.
