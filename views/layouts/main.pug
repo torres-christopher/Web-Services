@@ -1,208 +1,96 @@
-extends ../layouts/main
+doctype html
+html(lang='cs')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
 
-block content
+    //- SEO
+    title= title ? `${title} — ${siteName}` : siteName
+    meta(name='description' content=metaDescription || '')
+    if canonicalPath
+      link(rel='canonical' href=`${siteUrl}${canonicalPath}`)
 
-  //- ── Hero ───────────────────────────────────────────────
-  section.hero
-    .container
-      .hero__inner
-        .hero__text
-          p.hero__eyebrow ✦ Bezplatné české online nástroje
-          h1.hero__title
-            | Nástroje,
-            br
-            | které&nbsp;
-            em skutečně
-            br
-            | používáte.
-          p.hero__subtitle
-            | Text, PDF, obrázky, kalkulačky, česká data.
-            | Přes sto nástrojů — zdarma, bez registrace, bez podmínek.
-          .hero__cta
-            a.btn.btn--accent.btn--lg(href='/nastroje') Procházet nástroje
-            a.btn.btn--ghost-light.btn--lg(href='/#nastroje') Nejoblíbenější
+    //- Structured data
+    if jsonLd
+      script(type='application/ld+json')
+        | !{JSON.stringify(jsonLd)}
 
-        //- Mosaic — stats & facts
-        .hero__mosaic
-          .hero__mosaic-stat.hero__mosaic-stat--wide
-            span.hero__mosaic-number 100+
-            span.hero__mosaic-label Bezplatných nástrojů
-            p.hero__mosaic-desc Od jednoduchých textových nástrojů až po PDF, obrázky a česká data.
-          .hero__mosaic-stat
-            span.hero__mosaic-number 0
-            span.hero__mosaic-label Vyžadovaných registrací
-          .hero__mosaic-stat.hero__mosaic-stat--accent
-            span.hero__mosaic-number 🇨🇿
-            span.hero__mosaic-label Lokální data
-            p.hero__mosaic-desc ČNB, ARES, pracovní dny
+    //- Open Graph
+    meta(property='og:type' content='website')
+    meta(property='og:title' content=ogTitle || title)
+    meta(property='og:description' content=ogDescription || metaDescription)
+    meta(property='og:url' content=`${siteUrl}${canonicalPath || ''}`)
+    meta(property='og:site_name' content=siteName)
+    meta(property='og:image' content=ogImage || `${siteUrl}/images/og-default.png`)
 
-  //- ── Nejoblíbenější nástroje ─────────────────────────────
-  section.tools-section(id='nastroje')
-    .container
-      .section-header
-        .section-header__text
-          span.section-eyebrow Nejoblíbenější
-          h2.section-title Kde začít
-        a.section-link(href='/nastroje') Zobrazit všechny nástroje →
-      .tools-grid
-        a.tool-card(href='/pocet-znaku')
-          .tool-card__top
-            .tool-card__icon ✏️
-            span.tool-card__tag Text
-          h3.tool-card__name Počet znaků
-          p.tool-card__desc Spočítejte znaky, slova, řádky a odstavce. Pro studenty, copywritery a HR.
-        a.tool-card(href='/json-validator')
-          .tool-card__top
-            .tool-card__icon ⌨️
-            span.tool-card__tag Vývojáři
-          h3.tool-card__name JSON validator
-          p.tool-card__desc Ověřte, naformátujte nebo minifikujte JSON data okamžitě bez instalace.
-        a.tool-card(href='/bmi-kalkulator')
-          .tool-card__top
-            .tool-card__icon 💪
-            span.tool-card__tag Zdraví
-          h3.tool-card__name BMI kalkulačka
-          p.tool-card__desc Index tělesné hmotnosti v metrické i imperiální soustavě. S interpretací výsledku.
-        a.tool-card(href='/qr-kod-generator')
-          .tool-card__top
-            .tool-card__icon 📱
-            span.tool-card__tag Vývojáři
-          h3.tool-card__name QR generátor
-          p.tool-card__desc Generujte QR kódy pro URL, text, Wi-Fi nebo kontakt. Ke stažení jako PNG nebo SVG.
-        a.tool-card(href='/vek-kalkulator')
-          .tool-card__top
-            .tool-card__icon 📅
-            span.tool-card__tag Datum
-          h3.tool-card__name Věková kalkulačka
-          p.tool-card__desc Přesný věk v letech, měsících a dnech. Zjistěte i den v týdnu svého narození.
-        a.tool-card(href='/prevodnik-teploty')
-          .tool-card__top
-            .tool-card__icon 🌡️
-            span.tool-card__tag Převodník
-          h3.tool-card__name Převodník teploty
-          p.tool-card__desc Celsius, Fahrenheit a Kelvin. Okamžitý výsledek, přehledný vzorec.
+    //- Favicon
+    link(rel='icon' type='image/ico' href='/images/favicon.ico')
 
-  //- ── Czech data strip ────────────────────────────────────
-  section.czech-strip
-    .container
-      .czech-strip__inner
-        .czech-strip__text
-          span.section-eyebrow Česká data
-          h2.czech-strip__title
-            | Nástroje napojené
-            br
-            | na české zdroje.
-          p.czech-strip__desc
-            | Kurzy ČNB, IBAN kalkulačka, vyhledávání firem v ARES, rodná čísla,
-            | seznam pracovních dnů a bankovní kódy — vše čerpáme přímo z veřejných
-            | českých registrů a databází.
-          a.btn.btn--ghost-light(href='/nastroje#czech') Zobrazit česká data →
+    //- Styles
+    link(rel='stylesheet' href='/css/main.css')
 
-        .czech-tools-list
-          a.czech-tool-item(href='/prevod-men')
-            span.czech-tool-item__icon 💱
-            span.czech-tool-item__name Převod měn (kurzy ČNB)
-            span.czech-tool-item__tag ČNB API
-          a.czech-tool-item(href='/iban-kalkulator')
-            span.czech-tool-item__icon 🏦
-            span.czech-tool-item__name IBAN kalkulačka
-            span.czech-tool-item__tag ČNB
-          a.czech-tool-item(href='/ico-vyhledavani')
-            span.czech-tool-item__icon 🔍
-            span.czech-tool-item__name Vyhledávání IČO
-            span.czech-tool-item__tag ARES API
-          a.czech-tool-item(href='/rodne-cislo-validator')
-            span.czech-tool-item__icon 🆔
-            span.czech-tool-item__name Rodné číslo
-            span.czech-tool-item__tag Lokální logika
-          a.czech-tool-item(href='/pracovni-dny-a-svatky')
-            span.czech-tool-item__icon 📆
-            span.czech-tool-item__name Pracovní dny a svátky
-            span.czech-tool-item__tag MPSV data
-          a.czech-tool-item(href='/kod-banky')
-            span.czech-tool-item__icon 🏛️
-            span.czech-tool-item__name Kódy bank
-            span.czech-tool-item__tag CNB adresář
+    //- Google Analytics
+    if gaMeasurementId
+      script(async src=`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`)
+      script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '#{gaMeasurementId}', { anonymize_ip: true });
 
-  //- ── Features ─────────────────────────────────────────────
-  section.features-section
-    .container
-      .section-header
-        .section-header__text
-          span.section-eyebrow Proč Web Services
-          h2.section-title Co tento web nabízí
-      .features-grid
-        .feature-item
-          .feature-item__icon 🔒
-          h3.feature-item__title Soukromí na prvním místě
-          p.feature-item__desc
-            | Data zadaná do nástrojů nejsou ukládána ani sdílena. Soubory jsou
-            | zpracovány v paměti serveru a okamžitě smazány po vrácení výsledku.
-        .feature-item
-          .feature-item__icon ⚡
-          h3.feature-item__title Bez překážek
-          p.feature-item__desc
-            | Žádná registrace, žádné přihlašování. Otevřete nástroj a okamžitě
-            | pracujete. Každý nástroj funguje stejně na mobilu i desktopu.
-        .feature-item
-          .feature-item__icon 📄
-          h3.feature-item__title PDF a soubory
-          p.feature-item__desc
-            | Slučování, rozdělování a komprimace PDF. Konverze obrázků mezi
-            | formáty JPG, PNG, WebP a AVIF. Vše na jednom místě.
-        .feature-item
-          .feature-item__icon 🧮
-          h3.feature-item__title Kalkulačky
-          p.feature-item__desc
-            | Zdravotní kalkulačky, převodníky jednotek, datum a čas, číslenicové
-            | soustavy a kódování. Přesné vzorce, srozumitelné výsledky.
-        .feature-item
-          .feature-item__icon 🛠️
-          h3.feature-item__title Pro vývojáře
-          p.feature-item__desc
-            | JSON validátor, Base64, Markdown editor, regex tester, QR generátor
-            | s REST API, hash generátor a chmod kalkulačka.
-        .feature-item
-          .feature-item__icon 🤝
-          h3.feature-item__title Otevřený přístup
-          p.feature-item__desc
-            | Nástroje lze používat v komerčním prostředí bez omezení.
-            | Vybrané nástroje nabízejí REST API pro programový přístup.
+  body
+    include ../partials/cookie-banner
 
-  //- ── FAQ teaser ───────────────────────────────────────────
-  section.faq-teaser(id='faq')
-    .container
-      .faq-teaser__inner
-        .faq-teaser__text
-          span.section-eyebrow Časté dotazy
-          h2.section-title Máte otázku?
-          p.faq-teaser__desc
-            | Odpovídáme na nejčastější dotazy o fungování nástrojů,
-            | ochraně soukromí a dostupnosti dat.
-          a.btn.btn--primary(href='/faq') Všechny časté dotazy →
+    header.site-header
+      .container
+        .site-header__inner
+          a.site-logo(href='/')
+            span.site-logo__mark WS
+            span.site-logo__name= siteName
+          include ../partials/nav
+          .site-header__actions
+            a.btn.btn--ghost-light.btn--sm(href='/faq') Nápověda
+            a.btn.btn--accent.btn--sm(href='/nastroje') Nástroje
+          button.nav-toggle(aria-label='Otevřít menu' aria-expanded='false')
+            span
+            span
+            span
 
-        .faq-list
-          details.faq-item
-            summary.faq-question Je použití nástrojů skutečně zdarma?
-            p.faq-answer
-              | Ano, všechny nástroje jsou zcela bezplatné a nevyžadují žádnou
-              | registraci ani zadání platebního údaje. Web je financován reklamou.
+    main.site-main
+      block content
 
-          details.faq-item
-            summary.faq-question Co se děje s daty a soubory, které nahraji?
-            p.faq-answer
-              | Data jsou zpracována v operační paměti serveru. Soubory jsou po
-              | odeslání výsledku okamžitě smazány. Nic neukládáme ani nesdílíme.
+    footer.site-footer
+      .container
+        .site-footer__grid
+          .site-footer__brand
+            a.site-logo.site-logo--footer(href='/')
+              span.site-logo__mark WS
+              span.site-logo__name= siteName
+            p.site-footer__tagline
+              | Bezplatné české online nástroje.
+              br
+              | Bez registrace, bez podmínek.
+          .site-footer__links
+            h4.site-footer__heading Kategorie
+            ul
+              li: a(href='/nastroje#text') Textové nástroje
+              li: a(href='/nastroje#dev') Pro vývojáře
+              li: a(href='/nastroje#czech') Česká data
+              li: a(href='/nastroje#zdravi') Zdraví & fitness
+              li: a(href='/nastroje#prevodnik') Převodníky
+          .site-footer__links
+            h4.site-footer__heading Informace
+            ul
+              li: a(href='/faq') Časté dotazy
+              li: a(href='/ochrana-osobnich-udaju') Ochrana soukromí
+              li: a(href='/podminky-pouziti') Podmínky použití
+              li: a(href='/kontakt') Kontakt
+        .site-footer__bottom
+          p &copy; #{currentYear} #{siteName}
+          p Vyrobeno v České republice
 
-          details.faq-item
-            summary.faq-question Jsou výsledky kalkulaček přesné?
-            p.faq-answer
-              | Finanční nástroje čerpají z oficálních zdrojů (ČNB, ARES). Zdravotní
-              | kalkulačky používají uznávané vzorce. Výsledky jsou orientační.
+    //- AdSense
+    if adsenseClientId
+      script(async src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}` crossorigin='anonymous')
 
-          details.faq-item
-            summary.faq-question Existuje API pro vývojáře?
-            p.faq-answer
-              | Aktuálně nabízíme REST API pro QR generátor na&nbsp;
-              code /api/v1/qr
-              | . Plánujeme rozšíření i pro další nástroje.
+    script(src='/js/main.js')
