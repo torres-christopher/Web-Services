@@ -4,100 +4,135 @@ block content
   .legal-page
     .container
       .legal-page__header
-        h1.legal-page__title Kontakt
-        p.legal-page__meta Máte dotaz nebo narazili jste na chybu?
+        h1.legal-page__title Podmínky použití
+        p.legal-page__meta Poslední aktualizace: #{currentYear}
 
       .legal-page__body
 
-        .contact-grid
+        section.legal-section
+          h2 1. Provozovatel
+          p
+            | Web #{siteUrl} provozuje fyzická osoba podnikající na základě
+            | živnostenského oprávnění se sídlem v České republice.
+            | Používáním tohoto webu souhlasíte s těmito podmínkami použití.
 
-          .contact-info
-            section.legal-section
-              h2 O webu
-              p
-                | #{siteName} je bezplatný web s českými online nástroji pro text,
-                | kalkulačky, konverze souborů a česká data.
-              p
-                | Web provozuje fyzická osoba podnikající na základě živnostenského
-                | oprávnění se sídlem v České republice.
+        section.legal-section
+          h2 2. Povaha služby
+          p
+            | #{siteName} poskytuje bezplatné online nástroje pro zpracování
+            | textu, výpočty, konverze souborů a přístup k veřejným českým
+            | datům. Všechny nástroje jsou poskytovány „tak jak jsou" (as-is),
+            | bez záruky nepřetržité dostupnosti nebo absolutní přesnosti výsledků.
+          p
+            | Provozovatel si vyhrazuje právo kdykoli bez předchozího upozornění
+            | změnit, omezit nebo ukončit provoz jednotlivých nástrojů nebo
+            | celého webu.
 
-            section.legal-section
-              h2 Kdy nás kontaktovat
-              ul
-                li narazili jste na chybu v některém nástroji
-                li výsledek kalkulačky se zdá nesprávný
-                li máte nápad na nový nástroj
-                li dotazy k ochraně osobních údajů nebo podmínkám použití
-                li hlášení nevhodného obsahu reklam
+        section.legal-section
+          h2 3. Omezení odpovědnosti
+          ul
+            li
+              | Výsledky nástrojů slouží výhradně pro informační a orientační
+              | účely. Provozovatel nenese odpovědnost za rozhodnutí učiněná
+              | na základě výstupů z nástrojů.
+            li
+              | Zdravotní kalkulačky (BMI, kalorie, těhotenství, tělesný tuk
+              | apod.) nenahrazují lékařskou konzultaci ani odborné vyšetření.
+              | Vždy se poraďte s kvalifikovaným zdravotnickým pracovníkem.
+            li
+              | Finanční a právní nástroje (kurzy ČNB, IBAN, IČO, ARES apod.)
+              | jsou poskytovány pro orientační účely. Kritické údaje vždy
+              | ověřujte z oficiálních zdrojů (ČNB, ARES, Justice.cz).
+            li
+              | Provozovatel neručí za škody vzniklé výpadkem služby, ztrátou
+              | dat nebo nesprávným výsledkem nástroje.
+            li
+              | Výsledky generované nástroji nezakládají právní nárok ani
+              | odborné stanovisko.
 
-            section.legal-section
-              h2 Ostatní stránky
-              ul
-                li: a(href='/privacy') Ochrana osobních údajů
-                li: a(href='/terms') Podmínky použití
+        section.legal-section
+          h2 4. Přijatelné použití
+          p Používáním webu se zavazujete, že nebudete:
+          ul
+            li
+              | automatizovaně přistupovat k webu způsobem přetěžujícím server
+              | (scraping, DDoS, nadměrné automatické požadavky)
+            li
+              | obcházet technická omezení webu (rate limiting, limity velikosti
+              | souborů, CAPTCHA)
+            li
+              | nahrávat soubory obsahující malware, viry nebo jiný škodlivý kód
+            li
+              | nahrávat nebo zpracovávat obsah porušující autorská práva nebo
+              | jiná práva třetích osob
+            li
+              | používat web k činnostem v rozporu s právním řádem České republiky
+              | nebo Evropské unie
+            li
+              | vydávat automaticky generované výstupy za výsledky vlastní
+              | odborné práce v kontextech, kde by to mohlo být klamavé
 
-          .contact-form-wrap
-            h2 Napište nám
-            if success
-              .alert.alert--success
-                | Zpráva byla odeslána. Odpovíme co nejdříve.
-            else
-              form.contact-form(method='POST' action='/contact')
-                .form-group
-                  label.form-label(for='name') Jméno
-                  input.form-input(
-                    type='text'
-                    id='name'
-                    name='name'
-                    placeholder='Vaše jméno'
-                    value=formData && formData.name || ''
-                    required
-                    autocomplete='name'
-                  )
+        section.legal-section
+          h2 5. Nahrávané soubory
+          p
+            | Soubory nahrané za účelem zpracování (PDF, obrázky, dokumenty apod.)
+            | jsou zpracovány výhradně pro účely daného nástroje v operační paměti
+            | serveru. Soubory nejsou trvale ukládány na disk, nejsou sdíleny
+            | s třetími stranami a jsou automaticky smazány ihned po odeslání
+            | výsledku uživateli.
 
-                .form-group
-                  label.form-label(for='email') E-mail
-                  input.form-input(
-                    type='email'
-                    id='email'
-                    name='email'
-                    placeholder='vas@email.cz'
-                    value=formData && formData.email || ''
-                    required
-                    autocomplete='email'
-                  )
+        section.legal-section
+          h2 6. Duševní vlastnictví
+          p
+            | Veškerý obsah webu — design, zdrojový kód, texty, grafika — je
+            | chráněn autorským právem provozovatele nebo příslušných držitelů
+            | práv. Bez předchozího písemného souhlasu provozovatele není
+            | dovoleno obsah webu kopírovat, šířit nebo komerčně využívat.
+          p
+            | Výstupy generované nástroji (konvertované soubory, výsledky
+            | výpočtů, vygenerované QR kódy apod.) jsou plně ve vlastnictví
+            | uživatele, který je vygeneroval.
 
-                .form-group
-                  label.form-label(for='subject') Předmět
-                  select.form-select(id='subject' name='subject')
-                    option(value='' disabled selected) Vyberte předmět
-                    option(
-                      value='bug'
-                      selected=formData && formData.subject === 'bug'
-                    ) Chyba v nástroji
-                    option(
-                      value='idea'
-                      selected=formData && formData.subject === 'idea'
-                    ) Nápad na nový nástroj
-                    option(
-                      value='privacy'
-                      selected=formData && formData.subject === 'privacy'
-                    ) Ochrana osobních údajů
-                    option(
-                      value='other'
-                      selected=formData && formData.subject === 'other'
-                    ) Jiné
+        section.legal-section
+          h2 7. Reklama
+          p
+            | Web je financován reklamou prostřednictvím služby Google AdSense
+            | (Google LLC). Reklamy jsou zřetelně označeny jako „Reklama".
+            | Provozovatel webu nemá vliv na konkrétní obsah zobrazovaných reklam.
+            | Kliknutí na reklamu a následné transakce jsou výhradně mezi
+            | uživatelem a inzerentem.
 
-                .form-group
-                  label.form-label(for='message') Zpráva
-                  textarea.form-textarea(
-                    id='message'
-                    name='message'
-                    placeholder='Popište váš dotaz nebo problém...'
-                    rows='6'
-                    required
-                  )= formData && formData.message || ''
-                  if errors && errors.message
-                    p.form-error= errors.message
+        section.legal-section
+          h2 8. Ochrana osobních údajů
+          p
+            | Zpracování osobních údajů je popsáno v samostatném dokumentu:&nbsp;
+            a(href='/podminky-pouziti') Ochrana osobních údajů
+            | . Používáním webu berete na vědomí podmínky tam uvedené.
 
-                button.btn.btn--primary(type='submit') Odeslat zprávu
+        section.legal-section
+          h2 9. Rozhodné právo a řešení sporů
+          p
+            | Tyto podmínky se řídí právem České republiky. Případné spory
+            | budou přednostně řešeny smírnou cestou. Nebude-li smírné řešení
+            | možné, budou spory řešeny příslušnými soudy České republiky.
+          p
+            | Spotřebitelé mají rovněž právo na mimosoudní řešení sporu
+            | prostřednictvím České obchodní inspekce (
+            a(href='https://www.coi.cz' target='_blank' rel='noopener noreferrer') www.coi.cz
+            | ).
+
+        section.legal-section
+          h2 10. Změny podmínek
+          p
+            | Provozovatel si vyhrazuje právo tyto podmínky kdykoli změnit.
+            | Aktuální verze je vždy dostupná na této stránce spolu s datem
+            | poslední aktualizace. Další používání webu po zveřejnění změn
+            | znamená souhlas s aktualizovanými podmínkami.
+
+        section.legal-section
+          h2 11. Kontakt
+          p
+            | Dotazy, připomínky nebo hlášení porušení těchto podmínek zasílejte
+            | prostřednictvím&nbsp;
+            a(href='/kontakt') kontaktního formuláře
+            | .

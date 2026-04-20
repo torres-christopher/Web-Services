@@ -1,10 +1,10 @@
 /* ============================================================
-   MUJWEB.CZ — Main Stylesheet
+   Web-Services.cz — Main Stylesheet
    Design: Refined Utility
-   Fonts: Syne (headings) + DM Sans (body)
+   Fonts: Manrope (headings) + Inter (body)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap');
 
 /* ── 1. Custom Properties ─────────────────────────────────── */
 
@@ -40,8 +40,8 @@
   --c-info-bg: #e6f4f4;
 
   /* Typography */
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Public Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
   --font-mono: 'Fira Code', 'Cascadia Code', monospace;
 
   /* Type scale */
@@ -442,7 +442,6 @@ code {
   font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -0.03em;
   margin-bottom: var(--space-5);
 }
 
