@@ -75,3 +75,6 @@ git log --oneline --graph --all
 git add .
 git commit -m "Fix lint error in app.ts"
 git push
+
+## Delete stale remote tracking references
+git fetch --prune
