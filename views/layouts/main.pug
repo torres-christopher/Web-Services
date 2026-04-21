@@ -48,9 +48,8 @@ html(lang='cs')
             span.site-logo__mark WS
             span.site-logo__name= siteName
           include ../partials/nav
-          .site-header__actions
-            a.btn.btn--ghost-light.btn--sm(href='/faq') Nápověda
-            a.btn.btn--accent.btn--sm(href='/nastroje') Nástroje
+          .site-header__cta
+            a.btn.btn--ghost-inverse.btn--sm(href='/nastroje') Všechny nástroje
           button.nav-toggle(aria-label='Otevřít menu' aria-expanded='false')
             span
             span
@@ -66,10 +65,7 @@ html(lang='cs')
             a.site-logo.site-logo--footer(href='/')
               span.site-logo__mark WS
               span.site-logo__name= siteName
-            p.site-footer__tagline
-              | Bezplatné české online nástroje.
-              br
-              | Bez registrace, bez podmínek.
+            p.site-footer__tagline Bezplatné české online nástroje
           .site-footer__links
             h4.site-footer__heading Kategorie
             ul
@@ -86,8 +82,7 @@ html(lang='cs')
               li: a(href='/podminky-pouziti') Podmínky použití
               li: a(href='/kontakt') Kontakt
         .site-footer__bottom
-          p &copy; #{currentYear} #{siteName}
-          p Vyrobeno v České republice
+          p &copy; #{currentYear} #{siteName}. Všechna práva vyhrazena.
 
     //- AdSense
     if adsenseClientId
