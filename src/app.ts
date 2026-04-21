@@ -7,8 +7,9 @@ import { localsMiddleware } from './middleware/locals.js'
 import { notFoundHandler } from './middleware/not-found.js'
 import { errorHandler } from './middleware/error-handler.js'
 // Routes
+import healthRouter from './modules/core/health/health.routes.js'
 import mainRouter from './modules/core/home/home.routes.js'
-import legalRouter from './modules/core/home/legal.routes.js'
+import legalRouter from './modules/core/legal/legal.routes.js'
 
 // Initialise dirname and filename (NodeNext does not allow)
 const __filename = fileURLToPath(import.meta.url)
@@ -32,7 +33,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }))
 app.use(localsMiddleware)
 
 // Main
-app.use('/', mainRouter, legalRouter)
+app.use('/', mainRouter, legalRouter, healthRouter)
 
 // Health
 app.get('/health', (req, res) => {

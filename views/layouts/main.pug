@@ -48,6 +48,8 @@ html(lang='cs')
             span.site-logo__mark WS
             span.site-logo__name= siteName
           include ../partials/nav
+          .site-header__cta
+            a.btn.btn--ghost-inverse.btn--sm(href='/nastroje') Všechny nástroje
           button.nav-toggle(aria-label='Otevřít menu' aria-expanded='false')
             span
             span
@@ -65,21 +67,22 @@ html(lang='cs')
               span.site-logo__name= siteName
             p.site-footer__tagline Bezplatné české online nástroje
           .site-footer__links
-            h4.site-footer__heading Nástroje
+            h4.site-footer__heading Kategorie
             ul
-              li: a(href='/nastroje') Všechny nástroje
-              li: a(href='/pocet-znaku') Počet znaků
-              li: a(href='/json-validator') JSON validator
-              li: a(href='/bmi-kalkulator') BMI kalkulačka
+              li: a(href='/nastroje#text') Textové nástroje
+              li: a(href='/nastroje#dev') Pro vývojáře
+              li: a(href='/nastroje#czech') Česká data
+              li: a(href='/nastroje#zdravi') Zdraví & fitness
+              li: a(href='/nastroje#prevodnik') Převodníky
           .site-footer__links
             h4.site-footer__heading Informace
             ul
+              li: a(href='/faq') Časté dotazy
               li: a(href='/ochrana-osobnich-udaju') Ochrana soukromí
               li: a(href='/podminky-pouziti') Podmínky použití
               li: a(href='/kontakt') Kontakt
         .site-footer__bottom
           p &copy; #{currentYear} #{siteName}. Všechna práva vyhrazena.
-          p.site-footer__disclaimer Nástroje jsou poskytovány „tak jak jsou" pouze pro informační účely.
 
     //- AdSense
     if adsenseClientId

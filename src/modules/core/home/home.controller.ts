@@ -10,3 +10,13 @@ export const getMain = catchAsync(async (req, res) => {
     }),
   })
 })
+
+export const getFAQ = catchAsync(async (req, res) => {
+  res.render('pages/info/faq', {
+    ...buildSeoMeta({
+      title: 'Často kladené otázky',
+      description: 'Nejčastěji kladené otázky',
+      path: '/faq',
+    }),
+  })
+})
