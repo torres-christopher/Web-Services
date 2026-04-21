@@ -5,9 +5,9 @@ export const calculatePocetZnaku = function(input: pocetZnakuInput): pocetZnakuO
         textLengthRaw: calculateTextLengthRaw(input.text),
         textLengthNoSpace: calculateTextLengthNoSpace(input.text),
         wordCount: calculateWordCount(input.text),
+        sentenceCount: calculateSentenceCount(input.text),
         nsCount: calculateNsCount(input.text),
         lineCount: calculateLineCount(input.text),
-        sentenceCount: calculateSentenceCount(input.text),
         readingTime: calculateReadingTime(input.text),
     }
     return outputObject
@@ -26,14 +26,22 @@ const calculateTextLengthNoSpace = function(input: string):number {
 // Word amount
 const calculateWordCount = function(input: string): number {
     if (isWhitespaceString(input)) return 0
-    return input.trim().split(/\s+/).length
+    const words = input.match(/[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]+/g)
+    return words ? words.length : 0;
 }
 
 // Sentence count
-const calculateSentenceCount = function(input: string):number {
-    if (isWhitespaceString(input)) return 0
-    const sentenceCount = input.match(/[\w)][.?!](\s|$)/g) 
-    return !sentenceCount ? 0 : sentenceCount.length
+const calculateSentenceCount = function(input: string): number {
+  if (isWhitespaceString(input)) return 0
+
+  // Strip text that has no real words at all
+  if (!input.match(/[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]/)) return 0
+
+  // Count boundaries — word of 4+ chars, then punctuation, then capital
+  const boundaries = input.match(/[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]{3,}[.?!]+\s+[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]/g)
+  const boundaryCount = boundaries ? boundaries.length : 0
+
+  return boundaryCount + 1
 }
 
 // NS length with space
@@ -50,6 +58,7 @@ const calculateLineCount = function(input: string):number {
 
 // Reading time rounded upwards
 const calculateReadingTime = function(input: string):number {
+    if (isWhitespaceString(input)) return 0
     const wordCount = calculateWordCount(input)
     return Math.ceil(wordCount/200)
 }
