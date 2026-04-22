@@ -1,6 +1,7 @@
 import { catchAsync } from '../../../shared/utils/catchAsync.js'
 import { buildSeoMeta } from '../../../shared/utils/seo.js'
 import { pocetZnakuInput } from './pocet-znaku.schema.js'
+import { calculatePocetZnaku } from './pocet-znaku.service.js'
 import { AppError, HttpStatus } from '../../../shared/types/errors.js'
 
 export const getPocetZnaku = catchAsync(async (req, res) => {
@@ -29,5 +30,7 @@ export const postPocetZnaku = catchAsync(async (req, res, next) => {
       description: 'Počet znaků - Počítadlo znaků',
       path: '/text/pocet-znaku',
     }),
+    text: input.data,
+    result: calculatePocetZnaku(input.data),
   })
 })

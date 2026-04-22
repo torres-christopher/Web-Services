@@ -1,7 +1,137 @@
 extends ../../../layouts/main
 
 block content
-  form(method='POST', action='/text/pocet-znaku')
-      textarea(name='text', id='text')
-      br
-      button(type='submit') Odeslat
+  section.tool-header
+    .container
+      nav.tool-header__breadcrumb(aria-label='Drobečková navigace')
+        a(href='/') Domů
+        span.tool-header__sep /
+        a(href='/text') Textové nástroje
+        span.tool-header__sep /
+        span Počet znaků
+
+      h1.tool-header__title Počet znaků
+      p.tool-header__description
+        | Jednoduché online počítadlo znaků, slov, vět, řádků, normostran a odhadované doby čtení.
+        | Vložte text do pole níže a okamžitě zobrazte výsledek.
+
+  section.tool-layout
+    .container
+      .tool-layout__inner
+        .tool-layout__main
+          form(method='POST', action='/text/pocet-znaku')
+            .form-group
+              label.form-label(for='text') Vložte text
+              textarea.form-textarea.form-textarea--large(
+                id='text'
+                name='text'
+                placeholder='Sem vložte nebo napište text...'
+              )= text || ''
+
+            .form-row
+              .form-group
+                button.btn.btn--primary.btn--lg(type='submit') Spočítat
+              .form-group
+                a.btn.btn--ghost.btn--lg(href='/text/pocet-znaku') Vymazat
+
+          if result
+            section.tool-result
+              .tool-result__header
+                h2.tool-result__heading Výsledek
+                button.copy-btn(type='button', data-copy-target='#text') Kopírovat text
+
+              .tool-result__content
+                .stat-grid
+                  .stat-card
+                    .stat-card__value= result.textLengthRaw
+                    .stat-card__label Znaků celkem
+
+                  .stat-card
+                    .stat-card__value= result.textLengthNoSpace
+                    .stat-card__label Bez mezer
+
+                  .stat-card
+                    .stat-card__value= result.wordCount
+                    .stat-card__label Slov
+
+                  .stat-card
+                    .stat-card__value= result.sentenceCount
+                    .stat-card__label Vět
+
+                  .stat-card
+                    .stat-card__value= Number.isInteger(result.nsCount) ? result.nsCount : result.nsCount.toFixed(2)
+                    .stat-card__label Normostran
+
+                  .stat-card
+                    .stat-card__value= result.lineCount
+                    .stat-card__label Řádků
+
+                  .stat-card
+                    .stat-card__value= result.readingTime
+                    .stat-card__label Min. čtení
+
+        aside.tool-layout__sidebar
+          .faq-list
+            details.faq-item(open)
+              summary.faq-question Co tento nástroj umí?
+              .faq-answer
+                p
+                  | Spočítá celkový počet znaků, počet znaků bez mezer, počet slov,
+                  | vět, řádků, normostran a orientační dobu čtení.
+
+            details.faq-item
+              summary.faq-question Jak se počítá normostrana?
+              .faq-answer
+                p
+                  | Normostrana je zde počítána jako 1 800 znaků včetně mezer.
+
+            details.faq-item
+              summary.faq-question Je nástroj zdarma?
+              .faq-answer
+                p
+                  | Ano, nástroj je zdarma a bez registrace.
+
+          .ad-slot(style='margin-top: 1rem;')
+            span Reklamní prostor
+
+  section.tool-faq
+    .container
+      h2.tool-faq__heading Často kladené otázky
+
+      .tool-faq__list
+        details.tool-faq__item
+          summary.tool-faq__question Počítá se interpunkce do znaků?
+          .tool-faq__answer
+            p Ano. Do celkového počtu znaků se započítávají i mezery, čísla a interpunkce.
+
+        details.tool-faq__item
+          summary.tool-faq__question Co znamená počet znaků bez mezer?
+          .tool-faq__answer
+            p Jde o délku textu po odstranění všech mezer, zalomení řádků a ostatních whitespace znaků.
+
+        details.tool-faq__item
+          summary.tool-faq__question Jak přesný je počet vět?
+          .tool-faq__answer
+            p
+              | Jde o praktický odhad podle interpunkce a struktury textu. U neobvyklých zápisů
+              | nebo velmi krátkých vět se může výsledek mírně lišit.
+
+  section.related-tools
+    .container
+      h2.related-tools__heading Související nástroje
+
+      .related-tools__grid
+        a.tool-card.tool-card--small(href='/text/pocet-slov')
+          .tool-card__icon Aa
+          .tool-card__content
+            .tool-card__name Počet slov
+
+        a.tool-card.tool-card--small(href='/text/odhad-doby-cteni')
+          .tool-card__icon ⏱
+          .tool-card__content
+            .tool-card__name Odhad doby čtení
+
+        a.tool-card.tool-card--small(href='/text/odstranit-mezery')
+          .tool-card__icon ⇄
+          .tool-card__content
+            .tool-card__name Odstranit mezery
