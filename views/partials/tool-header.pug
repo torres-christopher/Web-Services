@@ -2,8 +2,6 @@
   .container
     .tool-header__breadcrumb
       a(href='/') Domů
-      span.tool-header__sep /
-      a(href='/nastroje') Nástroje
       if toolCategory
         span.tool-header__sep /
         a(href=toolCategoryPath)= toolCategory

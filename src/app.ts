@@ -11,7 +11,7 @@ import healthRouter from './modules/core/health/health.routes.js'
 import mainRouter from './modules/core/home/home.routes.js'
 import legalRouter from './modules/core/legal/legal.routes.js'
 // Routes - Text tools
-import pocetZnakuRouter from './modules/text/pocet-znaku/pocet-znaku.routes.js'
+import textRouter from './modules/text/text.routes.js'
 
 // Initialise dirname and filename (NodeNext does not allow)
 const __filename = fileURLToPath(import.meta.url)
@@ -46,7 +46,7 @@ app.get('/health', (req, res) => {
 app.use('/', mainRouter, legalRouter, healthRouter)
 
 // Text tool routes
-app.use('/text', pocetZnakuRouter)
+app.use('/text', textRouter)
 
 // 404
 app.use(notFoundHandler)
