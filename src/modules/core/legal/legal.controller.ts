@@ -3,33 +3,34 @@ import { buildSeoMeta } from '../../../shared/utils/seo.js'
 
 // Contact page
 export const getContact = catchAsync(async (req, res) => {
-  res.render('pages/legal/contact', {
-        ...buildSeoMeta({
-    title: 'Kontakt',
-    description: 'Kontaktujte nás — hlášení chyb, nápady na nástroje, dotazy k ochraně soukromí.',
-    path: '/kontakt',
+  res.render('pages/core/legal/contact', {
+    ...buildSeoMeta({
+      title: 'Kontakt',
+      description: 'Kontaktujte nás — hlášení chyb, nápady na nástroje, dotazy k ochraně soukromí.',
+      path: '/kontakt',
     }),
   })
 })
 
 // Privacy page
 export const getPrivacy = catchAsync(async (req, res) => {
-  res.render('pages/legal/privacy', {
+  res.render('pages/core/legal/privacy', {
     ...buildSeoMeta({
-    title: 'Ochrana osobních údajů',
-    description: 'Zásady ochrany osobních údajů webu XXX.cz. Informace o cookies, trackování a zpracování dat.', // TODO: web name
-    path: '/ochrana-osobnich-udaju',
+      title: 'Ochrana osobních údajů',
+      description:
+        'Zásady ochrany osobních údajů webu XXX.cz. Informace o cookies, trackování a zpracování dat.', // TODO: web name
+      path: '/ochrana-osobnich-udaju',
     }),
   })
 })
 
 // Terms page
 export const getTerms = catchAsync(async (req, res) => {
-  res.render('pages/legal/terms', {
+  res.render('pages/core/legal/terms', {
     ...buildSeoMeta({
-    title: 'Podmínky použití',
-    description: 'Podmínky použití bezplatných online nástrojů na webu XXX.cz.', // TODO: web name
-    path: '/podminky-pouziti',
+      title: 'Podmínky použití',
+      description: 'Podmínky použití bezplatných online nástrojů na webu XXX.cz.', // TODO: web name
+      path: '/podminky-pouziti',
     }),
   })
 })
