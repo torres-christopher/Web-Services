@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const pocetZnakuInput = z.object({
-  text: z.string().max(100000)
+  text: z.string().max(100000),
 })
 
 export const pocetZnakuOutput = z.object({
