@@ -46,7 +46,7 @@ app.get('/health', (req, res) => {
 app.use('/', mainRouter, legalRouter, healthRouter)
 
 // Text tool routes
-app.use('/text-tools', pocetZnakuRouter)
+app.use('/text', pocetZnakuRouter)
 
 // 404
 app.use(notFoundHandler)

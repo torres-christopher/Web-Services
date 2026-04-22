@@ -1,0 +1,7 @@
+extends ../../../layouts/main
+
+block content
+  form(method='POST', action='/text/pocet-znaku')
+      textarea(name='text', id='text')
+      br
+      button(type='submit') Odeslat
