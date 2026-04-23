@@ -2,9 +2,12 @@
   .container
     .tool-header__breadcrumb
       a(href='/') Domů
-      if toolCategory
+      if categoryName
         span.tool-header__sep /
-        a(href=toolCategoryPath)= toolCategory
+        a(href=CategoryPath)= categoryName
+      if toolName
+        span.tool-header__sep /
+        a(href=toolPath)= toolName
     h1.tool-header__title= title
     if toolDescription
       p.tool-header__description= toolDescription

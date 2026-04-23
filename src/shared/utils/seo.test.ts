@@ -37,9 +37,9 @@ describe('buildSeoMeta', () => {
       title: 'Test',
       description: 'Description',
       path: '/test',
-      category: 'text-editors',
+      categoryName: 'text-editors',
     })
-    expect(result.toolCategory).toBe('text-editors')
+    expect(result.categoryName).toBe('text-editors')
   })
 
   it('generates jsonLd when category provided', () => {
@@ -47,7 +47,7 @@ describe('buildSeoMeta', () => {
       title: 'Test',
       description: 'Description',
       path: '/test',
-      category: 'text-editors',
+      categoryName: 'text-editors',
     })
     expect(result.jsonLd).toBeDefined()
     expect(result.jsonLd).toHaveProperty('@type', 'WebApplication')

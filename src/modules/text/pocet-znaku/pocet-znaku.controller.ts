@@ -1,18 +1,22 @@
 import { catchAsync } from '../../../shared/utils/catchAsync.js'
-import { buildSeoMeta } from '../../../shared/utils/seo.js'
+import { buildSeoMeta, type SeoInput } from '../../../shared/utils/seo.js'
 import { pocetZnakuInput } from './pocet-znaku.schema.js'
 import { calculatePocetZnaku } from './pocet-znaku.service.js'
 
+const seoInput: SeoInput = {
+  title: 'Počet znaků',
+  description:
+    'Spočítejte počet znaků, slov, vět, řádků a normostran v textu. Zdarma, bez registrace.',
+  path: '/text/pocet-znaku',
+  categoryName: 'Text',
+  categoryPath: '/text',
+  toolName: 'Počet Znaků',
+  toolPath: '/pocet-znaku',
+}
+
 export const getPocetZnaku = catchAsync(async (req, res) => {
   res.render('pages/tools/text/pocet-znaku', {
-    ...buildSeoMeta({
-      title: 'Počet znaků',
-      description:
-        'Spočítejte počet znaků, slov, vět, řádků a normostran v textu. Zdarma, bez registrace.',
-      path: '/text/pocet-znaku',
-      category: 'Text',
-      categoryPath: '/text',
-    }),
+    ...buildSeoMeta(seoInput),
   })
 })
 
@@ -34,14 +38,7 @@ export const postPocetZnaku = catchAsync(async (req, res) => {
   }
 
   res.status(status).render('pages/tools/text/pocet-znaku', {
-    ...buildSeoMeta({
-      title: 'Počet znaků',
-      description:
-        'Spočítejte počet znaků, slov, vět, řádků a normostran v textu. Zdarma, bez registrace.',
-      path: '/text/pocet-znaku',
-      category: 'Text',
-      categoryPath: '/text',
-    }),
+    ...buildSeoMeta(seoInput),
     text: input.data ? input.data : req.body.text,
     result: result,
     errorState,
