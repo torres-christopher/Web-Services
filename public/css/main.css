@@ -186,6 +186,18 @@ code {
   flex: 1;
 }
 
+.hidden {
+  display: none
+}
+
+.no-padding {
+  padding: 0
+}
+
+.no-margin {
+  margin: 0
+}
+
 /* ── 4. Buttons ───────────────────────────────────────────── */
 
 .btn {
@@ -204,6 +216,7 @@ code {
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
+  margin-top: var(--space-6);
 }
 
 .btn:focus-visible {
@@ -1006,7 +1019,6 @@ code {
 
 .tool-faq {
   padding: var(--space-12) 0;
-  border-top: 1px solid var(--c-border);
 }
 .tool-faq__heading {
   font-size: var(--text-2xl);
@@ -1617,7 +1629,6 @@ code {
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  margin-top: var(--space-4);
 }
 
 .sidebar-info__title {

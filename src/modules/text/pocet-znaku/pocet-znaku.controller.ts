@@ -2,6 +2,7 @@ import { catchAsync } from '../../../shared/utils/catchAsync.js'
 import { buildSeoMeta, type SeoInput } from '../../../shared/utils/seo.js'
 import { pocetZnakuInput } from './pocet-znaku.schema.js'
 import { calculatePocetZnaku } from './pocet-znaku.service.js'
+import { pocetZnakuFaq as faq } from './pocet-znaku.faq.js'
 
 const seoInput: SeoInput = {
   title: 'Počet znaků',
@@ -17,6 +18,7 @@ const seoInput: SeoInput = {
 export const getPocetZnaku = catchAsync(async (req, res) => {
   res.render('pages/tools/text/pocet-znaku', {
     ...buildSeoMeta(seoInput),
+    faq,
   })
 })
 
@@ -39,6 +41,7 @@ export const postPocetZnaku = catchAsync(async (req, res) => {
 
   res.status(status).render('pages/tools/text/pocet-znaku', {
     ...buildSeoMeta(seoInput),
+    faq,
     text: input.data ? input.data : req.body.text,
     result: result,
     errorState,
