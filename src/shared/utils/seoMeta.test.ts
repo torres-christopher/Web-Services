@@ -1,6 +1,6 @@
 // seo.test.ts
 import { describe, it, expect } from 'vitest'
-import { buildSeoMeta } from './seo.js'
+import { buildSeoMeta } from './seoMeta.js'
 
 describe('buildSeoMeta', () => {
   it('returns correct title', () => {

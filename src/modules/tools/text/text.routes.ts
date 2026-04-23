@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { buildSeoMeta } from '../../shared/utils/seo.js'
+import { buildSeoMeta } from '../../../shared/utils/seoMeta.js'
 import pocetZnakuRouter from './pocet-znaku/pocet-znaku.routes.js'
 
 const router = Router()

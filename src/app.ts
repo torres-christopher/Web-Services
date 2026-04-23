@@ -7,11 +7,9 @@ import { localsMiddleware } from './middleware/locals.js'
 import { notFoundHandler } from './middleware/not-found.js'
 import { errorHandler } from './middleware/error-handler.js'
 // Routes - Core
-import healthRouter from './modules/core/health/health.routes.js'
-import mainRouter from './modules/core/home/home.routes.js'
-import legalRouter from './modules/core/legal/legal.routes.js'
-// Routes - Text tools
-import textRouter from './modules/text/text.routes.js'
+import coreRoutes from './modules/core/core.routes.js'
+// Routes - Tools
+import textRouter from './modules/tools/text/text.routes.js'
 
 // Initialise dirname and filename (NodeNext does not allow)
 const __filename = fileURLToPath(import.meta.url)
@@ -34,16 +32,8 @@ app.use(express.urlencoded({ extended: true, limit: '100kb' }))
 // Locals must be before routers
 app.use(localsMiddleware)
 
-// Health
-app.get('/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-  })
-})
-
-// Main and core routes
-app.use('/', mainRouter, legalRouter, healthRouter)
+// Core routes
+app.use('/', coreRoutes)
 
 // Text tool routes
 app.use('/text', textRouter)
