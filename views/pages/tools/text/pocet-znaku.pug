@@ -28,32 +28,33 @@ block content
                 spellcheck='true'
               )= text || ''
 
-          //- Live stats — shown immediately via JS, hidden until JS runs
-          .pocet-znaku-live(id='liveStats' aria-live='polite')
-            .stat-grid
-              .stat-card
-                p.stat-card__value(id='stat-raw')= result ? result.textLengthRaw : 0
-                p.stat-card__label Znaků celkem
-              .stat-card
-                p.stat-card__value(id='stat-nospace')= result ? result.textLengthNoSpace : 0
-                p.stat-card__label Znaků bez mezer
-              .stat-card
-                p.stat-card__value(id='stat-words')= result ? result.wordCount : 0
-                p.stat-card__label Slov
-              .stat-card
-                p.stat-card__value(id='stat-sentences')= result ? result.sentenceCount : 0
-                p.stat-card__label Vět
-              .stat-card
-                p.stat-card__value(id='stat-lines')= result ? result.lineCount : 0
-                p.stat-card__label Řádků
-              .stat-card
-                p.stat-card__value(id='stat-ns')= result ? result.nsCount.toFixed(2) : '0.00'
-                p.stat-card__label Normostran
-              .stat-card
-                p.stat-card__value(id='stat-reading')= result ? result.readingTime : 0
-                p.stat-card__label Minut čtení
+              //- Live stats — shown immediately via JS, hidden until JS runs
+              .pocet-znaku-live(id='liveStats' aria-live='polite')
+                .stat-grid
+                  .stat-card
+                    p.stat-card__value(id='stat-raw')= result ? result.textLengthRaw : 0
+                    p.stat-card__label Znaků celkem
+                  .stat-card
+                    p.stat-card__value(id='stat-nospace')= result ? result.textLengthNoSpace : 0
+                    p.stat-card__label Znaků bez mezer
+                  .stat-card
+                    p.stat-card__value(id='stat-words')= result ? result.wordCount : 0
+                    p.stat-card__label Slov
+                  .stat-card
+                    p.stat-card__value(id='stat-sentences')= result ? result.sentenceCount : 0
+                    p.stat-card__label Vět
+                  .stat-card
+                    p.stat-card__value(id='stat-lines')= result ? result.lineCount : 0
+                    p.stat-card__label Řádků
+                  .stat-card
+                    p.stat-card__value(id='stat-ns')= result ? result.nsCount.toFixed(2) : '0.00'
+                    p.stat-card__label Normostran
+                  .stat-card
+                    p.stat-card__value(id='stat-reading')= result ? result.readingTime : 0
+                    p.stat-card__label Minut čtení
+
+              button.btn.btn--primary(type='submit') Spočítat
           
-          button.btn.btn--primary(type='submit') Spočítat
 
           //- Tool FAQ
           include ../../../partials/tool-faq
