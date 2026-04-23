@@ -3,7 +3,7 @@ import { buildSeoMeta } from '../../../shared/utils/seo.js'
 
 // Contact page
 export const getContact = catchAsync(async (req, res) => {
-  res.status(200).render('pages/core/legal/contact', {
+  res.render('pages/core/legal/contact', {
     ...buildSeoMeta({
       title: 'Kontakt',
       description: 'Kontaktujte nás — hlášení chyb, nápady na nástroje, dotazy k ochraně soukromí.',
@@ -14,7 +14,7 @@ export const getContact = catchAsync(async (req, res) => {
 
 // Privacy page
 export const getPrivacy = catchAsync(async (req, res) => {
-  res.status(200).render('pages/core/legal/privacy', {
+  res.render('pages/core/legal/privacy', {
     ...buildSeoMeta({
       title: 'Ochrana osobních údajů',
       description:

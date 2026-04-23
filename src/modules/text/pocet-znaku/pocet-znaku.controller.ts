@@ -4,7 +4,7 @@ import { pocetZnakuInput } from './pocet-znaku.schema.js'
 import { calculatePocetZnaku } from './pocet-znaku.service.js'
 
 export const getPocetZnaku = catchAsync(async (req, res) => {
-  res.status(200).render('pages/tools/text/pocet-znaku', {
+  res.render('pages/tools/text/pocet-znaku', {
     ...buildSeoMeta({
       title: 'Počet znaků',
       description:
