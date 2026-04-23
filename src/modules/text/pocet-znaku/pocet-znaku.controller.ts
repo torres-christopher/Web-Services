@@ -11,7 +11,7 @@ const seoInput: SeoInput = {
   categoryName: 'Text',
   categoryPath: '/text',
   toolName: 'Počet Znaků',
-  toolPath: '/pocet-znaku',
+  toolPath: '/text/pocet-znaku',
 }
 
 export const getPocetZnaku = catchAsync(async (req, res) => {

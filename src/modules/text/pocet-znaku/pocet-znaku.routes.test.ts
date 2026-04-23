@@ -15,7 +15,7 @@ describe('POST /text/pocet-znaku', () => {
       .expect(200)
       .expect((res) => {
         // res.text is the HTML
-        expect(res.text).toContain('tool-result__header') // Check that the result section appears
+        expect(res.text).toContain('Lorem ipsum dolor') // Check that the result section appears
       })
   })
 
