@@ -20,7 +20,6 @@ block content
           //- Input form
           form(method='POST' action='/text/pocet-znaku')
             .form-group
-              label.form-label(for='text') Vložte text
               textarea.form-textarea.form-textarea--large(
                 id='text'
                 name='text'
@@ -28,61 +27,33 @@ block content
                 autocomplete='off'
                 spellcheck='true'
               )= text || ''
-            button.btn.btn--primary(type='submit') Spočítat
 
           //- Live stats — shown immediately via JS, hidden until JS runs
-          .pocet-znaku-live(id='liveStats' aria-live='polite' class=result ? 'hidden' : '')
+          .pocet-znaku-live(id='liveStats' aria-live='polite')
             .stat-grid
               .stat-card
-                p.stat-card__value(id='stat-raw') 0
+                p.stat-card__value(id='stat-raw')= result ? result.textLengthRaw : 0
                 p.stat-card__label Znaků celkem
               .stat-card
-                p.stat-card__value(id='stat-nospace') 0
+                p.stat-card__value(id='stat-nospace')= result ? result.textLengthNoSpace : 0
                 p.stat-card__label Znaků bez mezer
               .stat-card
-                p.stat-card__value(id='stat-words') 0
+                p.stat-card__value(id='stat-words')= result ? result.wordCount : 0
                 p.stat-card__label Slov
               .stat-card
-                p.stat-card__value(id='stat-sentences') 0
+                p.stat-card__value(id='stat-sentences')= result ? result.sentenceCount : 0
                 p.stat-card__label Vět
               .stat-card
-                p.stat-card__value(id='stat-lines') 0
+                p.stat-card__value(id='stat-lines')= result ? result.lineCount : 0
                 p.stat-card__label Řádků
               .stat-card
-                p.stat-card__value(id='stat-ns') 0.00
+                p.stat-card__value(id='stat-ns')= result ? result.nsCount.toFixed(2) : '0.00'
                 p.stat-card__label Normostran
               .stat-card
-                p.stat-card__value(id='stat-reading') 0
+                p.stat-card__value(id='stat-reading')= result ? result.readingTime : 0
                 p.stat-card__label Minut čtení
-
-          //- Server-rendered result — only shown after form submit
-          if result
-            .tool-result(id='toolResult')
-              .tool-result__header
-                h2.tool-result__heading Výsledek
-              .tool-result__content
-                .stat-grid
-                  .stat-card
-                    p.stat-card__value= result.textLengthRaw
-                    p.stat-card__label Znaků celkem
-                  .stat-card
-                    p.stat-card__value= result.textLengthNoSpace
-                    p.stat-card__label Znaků bez mezer
-                  .stat-card
-                    p.stat-card__value= result.wordCount
-                    p.stat-card__label Slov
-                  .stat-card
-                    p.stat-card__value= result.sentenceCount
-                    p.stat-card__label Vět
-                  .stat-card
-                    p.stat-card__value= result.lineCount
-                    p.stat-card__label Řádků
-                  .stat-card
-                    p.stat-card__value= result.nsCount.toFixed(2)
-                    p.stat-card__label Normostran
-                  .stat-card
-                    p.stat-card__value= result.readingTime
-                    p.stat-card__label Minut čtení
+          
+          button.btn.btn--primary(type='submit') Spočítat
 
           //- Tool FAQ
           include ../../../partials/tool-faq
@@ -104,9 +75,11 @@ block content
               | řádků a normostran. Výsledky se aktualizují v reálném čase
               | při psaní.
             ul.sidebar-info__list
-              li Normostrana = 1 800 znaků včetně mezer
-              li Rychlost čtení = 200 slov za minutu
-              li Počet vět je přibližný
+              li Výsledky se aktualizují živě při psaní
+              li Text se nikam neukládá
+              li Vhodné pro češtinu i běžné latinkové texty
+              li Odhad vět a doby čtení je orientační
+              li Funguje i bez JavaScriptu přes odeslání formuláře
 
   //- Page script for live counting
   script(src='/js/tools/pocet-znaku.js' defer)

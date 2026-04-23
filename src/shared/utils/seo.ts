@@ -4,8 +4,10 @@ export interface SeoInput {
   title: string
   description: string
   path: string
-  category?: string
+  categoryName?: string
   categoryPath?: string
+  toolName?: string
+  toolPath?: string
 }
 
 export interface SeoMeta {
@@ -20,9 +22,11 @@ export interface SeoMeta {
   ogImage?: string
 
   // Tool specific stuff
-  toolCategory?: string | undefined
-  toolCategoryPath?: string | undefined
+  toolName?: string | undefined
+  toolPath?: string | undefined
   toolDescription?: string | undefined
+  categoryName?: string | undefined
+  categoryPath?: string | undefined
 
   // Structured data in JSON-LD
   jsonLd?: object
@@ -38,12 +42,14 @@ export const buildSeoMeta = (input: SeoInput) => {
     ogDescription: input.description,
     ogImage: `${env.SITE_URL}/images/og-default.png`,
 
-    toolCategory: input?.category,
-    toolCategoryPath: input?.categoryPath,
+    toolName: input?.toolName,
+    toolPath: input?.toolPath,
     toolDescription: undefined,
+    categoryName: input?.categoryName,
+    categoryPath: input?.categoryPath,
 
     // Only if input.category exists
-    jsonLd: input.category
+    jsonLd: input.categoryName
       ? {
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
