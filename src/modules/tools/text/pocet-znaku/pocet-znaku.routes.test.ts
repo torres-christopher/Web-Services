@@ -1,6 +1,6 @@
 import request from 'supertest'
 import { describe, it, expect } from 'vitest'
-import { app } from '../../../app.js'
+import { app } from '../../../../app.js'
 
 describe('POST /text/pocet-znaku', () => {
   it('GET returns 200', async () => {

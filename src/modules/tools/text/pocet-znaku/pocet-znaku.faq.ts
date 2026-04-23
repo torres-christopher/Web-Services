@@ -1,4 +1,4 @@
-import type { FaqItem } from '../../../shared/types/faq.js'
+import type { FaqItem } from '../../../../shared/types/faq.js'
 
 export const pocetZnakuFaq: FaqItem[] = [
   {

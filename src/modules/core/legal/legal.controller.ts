@@ -1,5 +1,5 @@
 import { catchAsync } from '../../../shared/utils/catchAsync.js'
-import { buildSeoMeta } from '../../../shared/utils/seo.js'
+import { buildSeoMeta } from '../../../shared/utils/seoMeta.js'
 
 // Contact page
 export const getContact = catchAsync(async (req, res) => {

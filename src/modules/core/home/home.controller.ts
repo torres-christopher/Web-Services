@@ -1,5 +1,5 @@
 import { catchAsync } from '../../../shared/utils/catchAsync.js'
-import { buildSeoMeta } from '../../../shared/utils/seo.js'
+import { buildSeoMeta } from '../../../shared/utils/seoMeta.js'
 
 export const getMain = catchAsync(async (req, res) => {
   res.render('pages/core/home', {

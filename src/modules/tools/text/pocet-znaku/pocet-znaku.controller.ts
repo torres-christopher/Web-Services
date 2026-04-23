@@ -1,5 +1,6 @@
-import { catchAsync } from '../../../shared/utils/catchAsync.js'
-import { buildSeoMeta, type SeoInput } from '../../../shared/utils/seo.js'
+import { catchAsync } from '../../../../shared/utils/catchAsync.js'
+import { type SeoInput } from '../../../../shared/types/seo.js'
+import { buildSeoMeta } from '../../../../shared/utils/seoMeta.js'
 import { pocetZnakuInput } from './pocet-znaku.schema.js'
 import { calculatePocetZnaku } from './pocet-znaku.service.js'
 import { pocetZnakuFaq as faq } from './pocet-znaku.faq.js'
