@@ -4,7 +4,7 @@ import { pocetZnakuInput } from './pocet-znaku.schema.js'
 import { calculatePocetZnaku } from './pocet-znaku.service.js'
 
 export const getPocetZnaku = catchAsync(async (req, res) => {
-  res.render('pages/tools/text/pocet-znaku', {
+  res.status(200).render('pages/tools/text/pocet-znaku', {
     ...buildSeoMeta({
       title: 'Počet znaků',
       description:
@@ -22,16 +22,18 @@ export const postPocetZnaku = catchAsync(async (req, res) => {
   let result = null
   let errorState: boolean = false
   let errorMessage: string | null = null
+  let status: number = 200
 
   // On error
   if (!input.success) {
     errorState = true
     errorMessage = 'Text je příliš dlouhý. Maximální délka je 100 000 znaků.'
+    status = 400
   } else {
     result = calculatePocetZnaku(input.data)
   }
 
-  res.render('pages/tools/text/pocet-znaku', {
+  res.status(status).render('pages/tools/text/pocet-znaku', {
     ...buildSeoMeta({
       title: 'Počet znaků',
       description:
