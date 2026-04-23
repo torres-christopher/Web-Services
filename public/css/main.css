@@ -698,6 +698,8 @@ code {
 }
 
 .faq-teaser__text {
+  /* TODO: Just a placeholer value */
+  background-image: none;
 }
 .faq-teaser__text .section-title {
   margin-bottom: var(--space-3);
