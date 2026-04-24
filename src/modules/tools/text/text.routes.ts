@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { buildSeoMeta } from '../../../shared/utils/seoMeta.js'
+import { tools } from '../../../shared/data/tools.js'
 import pocetZnakuRouter from './pocet-znaku/pocet-znaku.routes.js'
+import prevodVelikostiRouter from './prevod-velikosti-znaku/prevod-velikosti-znaku.routes.js'
 
 const router = Router()
 
@@ -10,15 +12,17 @@ router.get('/', (_req, res) => {
     ...buildSeoMeta({
       title: 'Textové nástroje',
       description:
-        'Bezplatné online nástroje pro práci s textem. Počítání znaków, převod písmen, čištění textu a další.',
-      path: '/text',
+        'Bezplatné online nástroje pro práci s textem. Počítání znaků, převod písmen, čištění textu a další.',
+      path: '/textove-nastoje',
     }),
-    toolCategory: 'Text',
-    toolCategoryPath: '/text',
+    toolCategory: 'Textové nástroje',
+    toolCategoryPath: '/textove-nastroje',
+    tools: tools.filter((t) => t.enabled).slice(0, 6),
   })
 })
 
 // Tools
 router.use('/pocet-znaku', pocetZnakuRouter)
+router.use('/prevod-velikosti-znaku', prevodVelikostiRouter)
 
 export default router

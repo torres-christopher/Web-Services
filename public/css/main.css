@@ -216,7 +216,6 @@ code {
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  margin-top: var(--space-6);
 }
 
 .btn:focus-visible {
@@ -881,6 +880,7 @@ code {
   grid-template-columns: 1fr 300px;
   gap: var(--space-8);
   align-items: start;
+  margin-bottom: var(--space-6);
 }
 .tool-layout__main {
   min-width: 0;
@@ -1673,7 +1673,7 @@ code {
 /* ── Live stats visibility ────────────────────────────────── */
 
 .pocet-znaku-live {
-  margin-top: var(--space-6);
+  margin: var(--space-6) 0;
 }
 
 /* ── Disabled tool card (coming soon) ────────────────────── */

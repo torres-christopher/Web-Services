@@ -13,53 +13,18 @@ block content
 
       .tools-grid
 
-        //- Live tools
-        a.tool-card(href='/text/pocet-znaku')
-          .tool-card__icon ✏️
-          .tool-card__body
-            h3.tool-card__name Počet znaků
-            p.tool-card__desc Spočítejte znaky, slova, věty, řádky a normostran v textu.
-          span.tool-card__tag Text
-
-        //- Placeholders — add href and remove 'coming soon' as tools go live
-        .tool-card.tool-card--disabled
-          .tool-card__icon 🔤
-          .tool-card__body
-            h3.tool-card__name Velikost písmen
-            p.tool-card__desc Převod na velká, malá, titulková nebo větná písmena.
-          span.tool-card__tag Připravujeme
-
-        .tool-card.tool-card--disabled
-          .tool-card__icon 🧹
-          .tool-card__body
-            h3.tool-card__name Čištění textu
-            p.tool-card__desc Odstraňte přebytečné mezery a zalomení řádků.
-          span.tool-card__tag Připravujeme
-
-        .tool-card.tool-card--disabled
-          .tool-card__icon 🗑️
-          .tool-card__body
-            h3.tool-card__name Duplikátní řádky
-            p.tool-card__desc Odstraňte duplicitní řádky ze seznamu.
-          span.tool-card__tag Připravujeme
-
-        .tool-card.tool-card--disabled
-          .tool-card__icon ➕
-          .tool-card__body
-            h3.tool-card__name Prefix a suffix
-            p.tool-card__desc Přidejte prefix nebo suffix ke každému řádku textu.
-          span.tool-card__tag Připravujeme
-
-        .tool-card.tool-card--disabled
-          .tool-card__icon 📋
-          .tool-card__body
-            h3.tool-card__name Extrakce sloupců
-            p.tool-card__desc Vyberte sloupec z odděleného textu nebo CSV.
-          span.tool-card__tag Připravujeme
-
-        .tool-card.tool-card--disabled
-          .tool-card__icon 🔗
-          .tool-card__body
-            h3.tool-card__name Generátor slugů
-            p.tool-card__desc Vytvořte URL slug z nadpisu včetně české diakritiky.
-          span.tool-card__tag Připravujeme
+        each tool in tools
+          if tool.enabled
+            a.tool-card(href=tool.path)
+              .tool-card__icon= tool.icon
+              .tool-card__body
+                h3.tool-card__name= tool.title
+                p.tool-card__desc= tool.description
+              span.tool-card__tag= tool.categoryName
+          else
+            .tool-card.tool-card--disabled
+              .tool-card__icon= tool.icon
+              .tool-card__body
+                h3.tool-card__name= tool.title
+                p.tool-card__desc= tool.description
+              span.tool-card__tag Připravujeme

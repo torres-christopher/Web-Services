@@ -26,8 +26,8 @@ app.set('views', join(__dirname, '../views'))
 app.use(express.static(join(__dirname, '../public')))
 
 // Body parsing
-app.use(express.json({ limit: '10kb' }))
-app.use(express.urlencoded({ extended: true, limit: '100kb' }))
+app.use(express.json({ limit: '100kb' }))
+app.use(express.urlencoded({ extended: true, limit: '500kb' }))
 
 // Locals must be before routers
 app.use(localsMiddleware)
@@ -36,7 +36,7 @@ app.use(localsMiddleware)
 app.use('/', coreRoutes)
 
 // Text tool routes
-app.use('/text', textRouter)
+app.use('/textove-nastroje', textRouter)
 
 // 404
 app.use(notFoundHandler)

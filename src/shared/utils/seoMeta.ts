@@ -11,9 +11,9 @@ export const buildSeoMeta = (input: SeoInput) => {
     ogDescription: input.description,
     ogImage: `${env.SITE_URL}/images/og-default.png`,
 
-    toolName: input?.toolName,
-    toolPath: input?.toolPath,
-    toolDescription: undefined,
+    toolName: input?.title,
+    toolPath: input?.path,
+    toolDescription: input.description,
     categoryName: input?.categoryName,
     categoryPath: input?.categoryPath,
 

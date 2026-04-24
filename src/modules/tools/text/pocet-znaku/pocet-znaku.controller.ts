@@ -1,24 +1,16 @@
 import { catchAsync } from '../../../../shared/utils/catchAsync.js'
-import { type SeoInput } from '../../../../shared/types/seo.js'
 import { buildSeoMeta } from '../../../../shared/utils/seoMeta.js'
 import { pocetZnakuInput } from './pocet-znaku.schema.js'
 import { calculatePocetZnaku } from './pocet-znaku.service.js'
 import { pocetZnakuFaq as faq } from './pocet-znaku.faq.js'
+import { tools } from '../../../../shared/data/tools.js'
 
-const seoInput: SeoInput = {
-  title: 'Počet znaků',
-  description:
-    'Spočítejte počet znaků, slov, vět, řádků a normostran v textu. Zdarma, bez registrace.',
-  path: '/text/pocet-znaku',
-  categoryName: 'Text',
-  categoryPath: '/text',
-  toolName: 'Počet Znaků',
-  toolPath: '/text/pocet-znaku',
-}
+const tool = tools.find((t) => t.slug === 'pocet-znaku')
+if (!tool) throw new Error('Tool not found: pocet-znaku')
 
 export const getPocetZnaku = catchAsync(async (req, res) => {
   res.render('pages/tools/text/pocet-znaku', {
-    ...buildSeoMeta(seoInput),
+    ...buildSeoMeta(tool),
     faq,
   })
 })
@@ -34,14 +26,14 @@ export const postPocetZnaku = catchAsync(async (req, res) => {
   // On error
   if (!input.success) {
     errorState = true
-    errorMessage = 'Text je příliš dlouhý. Maximální délka je 100 000 znaků.'
+    errorMessage = 'Text je příliš dlouhý. Maximální délka je 300 000 znaků.'
     status = 400
   } else {
     result = calculatePocetZnaku(input.data)
   }
 
   res.status(status).render('pages/tools/text/pocet-znaku', {
-    ...buildSeoMeta(seoInput),
+    ...buildSeoMeta(tool),
     faq,
     text: input.data ? input.data : req.body.text,
     result: result,

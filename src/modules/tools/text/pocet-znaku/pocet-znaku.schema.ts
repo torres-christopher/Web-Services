@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const pocetZnakuInput = z.string().max(100000).default('')
+export const pocetZnakuInput = z.string().max(300000).default('')
 
 export const pocetZnakuOutput = z.object({
   textLengthRaw: z.number().int().nonnegative(),

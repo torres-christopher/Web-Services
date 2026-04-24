@@ -38,42 +38,21 @@ block content
         h2.section-title Nejoblíbenější nástroje
         a.section-link(href='/nastroje') Zobrazit vše →
       .tools-grid
-        a.tool-card(href='/text/pocet-znaku')
-          .tool-card__icon ✏️
-          .tool-card__body
-            h3.tool-card__name Počet znaků
-            p.tool-card__desc Znaky, slova, řádky a odstavce. Pro studenty a copywritery.
-          span.tool-card__tag Text
-        a.tool-card.tool-card--disabled(href='/json-validator')
-          .tool-card__icon ⌨️
-          .tool-card__body
-            h3.tool-card__name JSON validator
-            p.tool-card__desc Ověřte, naformátujte nebo minifikujte JSON data.
-          span.tool-card__tag Vývojáři
-        a.tool-card.tool-card--disabled(href='/bmi-kalkulator')
-          .tool-card__icon 💪
-          .tool-card__body
-            h3.tool-card__name BMI kalkulačka
-            p.tool-card__desc Index tělesné hmotnosti v metrické i imperiální soustavě.
-          span.tool-card__tag Zdraví
-        a.tool-card.tool-card--disabled(href='/iban-kalkulator')
-          .tool-card__icon 🏦
-          .tool-card__body
-            h3.tool-card__name IBAN kalkulačka
-            p.tool-card__desc Převeďte české číslo účtu na IBAN nebo ověřte platnost.
-          span.tool-card__tag Česky
-        a.tool-card.tool-card--disabled(href='/prevod-men')
-          .tool-card__icon 💱
-          .tool-card__body
-            h3.tool-card__name Převod měn
-            p.tool-card__desc Kurzy přímo z ČNB. Aktuální každý pracovní den ve 14:30.
-          span.tool-card__tag Česky
-        a.tool-card.tool-card--disabled(href='/ico-vyhledavani')
-          .tool-card__icon 🔍
-          .tool-card__body
-            h3.tool-card__name Vyhledávání IČO
-            p.tool-card__desc Údaje o firmě z registru ARES zadáním IČO.
-          span.tool-card__tag Česky
+        each tool in tools
+          if tool.enabled
+            a.tool-card(href=tool.path)
+              .tool-card__icon= tool.icon
+              .tool-card__body
+                h3.tool-card__name= tool.title
+                p.tool-card__desc= tool.description
+              span.tool-card__tag= tool.categoryName
+          else
+            .tool-card.tool-card--disabled
+              .tool-card__icon= tool.icon
+              .tool-card__body
+                h3.tool-card__name= tool.title
+                p.tool-card__desc= tool.description
+              span.tool-card__tag Připravujeme
 
   //- ── Features ─────────────────────────────────────────────
   section.features-section

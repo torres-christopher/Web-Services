@@ -1,5 +1,6 @@
 import { catchAsync } from '../../../shared/utils/catchAsync.js'
 import { buildSeoMeta } from '../../../shared/utils/seoMeta.js'
+import { tools } from '../../../shared/data/tools.js'
 
 export const getMain = catchAsync(async (req, res) => {
   res.render('pages/core/home', {
@@ -9,6 +10,10 @@ export const getMain = catchAsync(async (req, res) => {
         'Více než 60 bezplatných nástrojů pro práci s textem, převody jednotek a dalšími daty. Zdarma, bez registrace.',
       path: '/',
     }),
+    tools: tools
+      .filter((t) => t.featured)
+      .sort((a, b) => a.featured! - b.featured!)
+      .slice(0, 6),
   })
 })
 
