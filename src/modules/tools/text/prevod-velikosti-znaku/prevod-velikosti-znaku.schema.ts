@@ -1,9 +1,8 @@
 import { z } from 'zod'
 
 export const prevodVelikostiZnakuInput = z.object({
-  text: z.string().max(100000).default(''),
+  text: z.string().max(300000).default(''),
   conversionType: z.enum([
-    'default',
     'sentence-case',
     'lower-case',
     'upper-case',
@@ -11,7 +10,7 @@ export const prevodVelikostiZnakuInput = z.object({
     'reverse',
   ]),
 })
-export const prevodVelikostiZnakuOutput = z.string().max(100000).default('')
+export const prevodVelikostiZnakuOutput = z.string().max(300000).default('')
 
 export type prevodVelikostiZnakuInput = z.infer<typeof prevodVelikostiZnakuInput>
 export type prevodVelikostiZnakuOutput = z.infer<typeof prevodVelikostiZnakuOutput>

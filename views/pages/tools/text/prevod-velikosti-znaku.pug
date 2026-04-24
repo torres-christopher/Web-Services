@@ -1,0 +1,60 @@
+extends ../../../layouts/main
+
+block content
+  //- Tool header — breadcrumb + title
+  include ../../../partials/tool-header
+
+  .tool-layout
+    .container
+      .tool-layout__inner
+
+        //- ── Main column ──────────────────────────────────────
+        .tool-layout__main
+
+          //- Error message
+          if errorState && errorMessage
+            .alert.alert--error(role='alert')
+              p= errorMessage
+
+          //- Input form
+          form(method='POST' action='/textove-nastroje/prevod-velikosti-znaku')
+            .form-group
+              textarea.form-textarea.form-textarea--large(
+                id='text'
+                name='text'
+                placeholder='Sem vložte nebo napište svůj text...'
+                autocomplete='off'
+                spellcheck='false'
+              )= result || ''
+            //- Conversion buttons
+            .conversion-buttons
+              button.btn.btn--ghost(type='submit' name='conversionType' value='sentence-case') Větný zápis
+              button.btn.btn--ghost(type='submit' name='conversionType' value='lower-case') malá písmena
+              button.btn.btn--ghost(type='submit' name='conversionType' value='upper-case') VELKÁ PÍSMENA
+              button.btn.btn--ghost(type='submit' name='conversionType' value='capitalized-case') Capital Case
+              button.btn.btn--ghost(type='submit' name='conversionType' value='reverse') Obrátit text
+
+          //- Tool FAQ
+          include ../../../partials/tool-faq
+          //- Related tools
+          include ../../../partials/tool-related
+
+        //- ── Sidebar ──────────────────────────────────────────
+        .tool-layout__sidebar
+
+          //- Ad slot
+          include ../../../partials/ad-slot
+
+          //- About this tool
+          .sidebar-info
+            h3.sidebar-info__title O nástroji
+            p.sidebar-info__text
+              | Převodník velikosti písmen umožňuje rychle změnit text na
+              | velká, malá, titulková nebo větná písmena.
+            ul.sidebar-info__list
+              li Text se nikam neukládá
+              li Podporuje češtinu a diakritiku
+              li Funguje i bez JavaScriptu přes odeslání formuláře
+
+  //- Page script for live conversion
+  script(src='/js/tools/prevod-velikosti-znaku.js' defer)

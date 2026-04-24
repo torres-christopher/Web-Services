@@ -7,6 +7,11 @@ export const pocetZnakuFaq: FaqItem[] = [
       'Nástroj počítá celkový počet znaků, počet znaků bez mezer, počet slov, počet vět, počet řádků, počet normostran a orientační dobu čtení. Výsledky slouží jako rychlý praktický odhad pro běžné texty.',
   },
   {
+    question: 'Jak dlouhý text mohu spočítat?',
+    answer:
+      'Nástroj zvládne texty až do délky 300 000 znaků, což odpovídá přibližně 166 normostranám.',
+  },
+  {
     question: 'Co znamená počet znaků celkem?',
     answer:
       'Počet znaků celkem je délka celého vloženého textu přesně tak, jak byl zadán. Započítávají se písmena, čísla, mezery, interpunkce i zalomení řádků. Vypočítává se jako běžná délka řetězce.',
