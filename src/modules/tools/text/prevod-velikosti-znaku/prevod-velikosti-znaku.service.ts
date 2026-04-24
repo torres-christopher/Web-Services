@@ -9,7 +9,7 @@ export const sentenceCase = function (
 ): prevodVelikostiZnakuOutput {
   return input.text
     .toLocaleLowerCase()
-    .replace(/(^\s*\w)|([.!?]\s+\w)/g, (match) => match.toLocaleUpperCase())
+    .replace(/(^\s*\p{L})|([.!?]\s+\p{L})/gu, (match) => match.toLocaleUpperCase())
 }
 
 // Lower Case
