@@ -51,77 +51,115 @@ Data entered into tools is never stored or shared with third parties. Files uplo
 
 ```
 Web-Services/
-├── src/
-│   ├── app.ts                    # Express app — middleware stack, router registration
-│   ├── server.ts                 # HTTP server, graceful shutdown, process handlers
+├── .env
+├── .env.example
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── .gitignore
+├── .prettierrc
+├── README.md
+├── eslint.config.mjs
+├── git-flow.bash
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── vitest.config.ts
+│
+├── src/                                  # TypeScript source
+│   ├── app.ts
+│   ├── server.ts
 │   ├── config/
-│   │   └── env.ts                # Environment variable validation via Zod
+│   │   └── env.ts
 │   ├── middleware/
-│   │   ├── error-handler.ts      # Global error handler (4-param Express middleware)
-│   │   ├── locals.ts             # res.locals defaults for all views
-│   │   └── not-found.ts          # 404 handler
+│   │   ├── error-handler.ts
+│   │   ├── locals.ts
+│   │   └── not-found.ts
 │   ├── modules/
 │   │   ├── core/
-│   │   │   ├── health/           # Health-check endpoint
+│   │   │   ├── core.routes.ts
+│   │   │   ├── health/
 │   │   │   │   ├── health.controller.ts
-│   │   │   │   └── health.routes.ts
-│   │   │   ├── home/             # Homepage controller and routes
+│   │   │   │   ├── health.routes.ts
+│   │   │   │   └── health.routes.test.ts
+│   │   │   ├── home/
 │   │   │   │   ├── home.controller.ts
 │   │   │   │   └── home.routes.ts
-│   │   │   └── legal/            # Legal pages (privacy, terms, contact, FAQ)
+│   │   │   └── legal/
 │   │   │       ├── legal.controller.ts
 │   │   │       └── legal.routes.ts
-│   │   └── text/
-│   │       └── pocet-znaku/      # Tool: character counter
-│   │           ├── pocet-znaku.controller.ts
-│   │           ├── pocet-znaku.routes.ts
-│   │           ├── pocet-znaku.schema.ts
-│   │           ├── pocet-znaku.service.ts
-│   │           └── pocet-znaku.service.test.ts
+│   │   └── tools/
+│   │       └── text/
+│   │           ├── text.routes.ts
+│   │           ├── pocet-znaku/
+│   │           │   ├── pocet-znaku.controller.ts
+│   │           │   ├── pocet-znaku.faq.ts
+│   │           │   ├── pocet-znaku.routes.ts
+│   │           │   ├── pocet-znaku.routes.test.ts
+│   │           │   ├── pocet-znaku.schema.ts
+│   │           │   ├── pocet-znaku.service.ts
+│   │           │   └── pocet-znaku.service.test.ts
+│   │           └── prevod-velikosti-znaku/
+│   │               ├── prevod-velikosti-znaku.controller.ts
+│   │               ├── prevod-velikosti-znaku.faq.ts
+│   │               ├── prevod-velikosti-znaku.routes.ts
+│   │               ├── prevod-velikosti-znaku.routes.test.ts
+│   │               ├── prevod-velikosti-znaku.schema.ts
+│   │               ├── prevod-velikosti-znaku.service.ts
+│   │               └── prevod-velikosti-znaku.service.test.ts
 │   └── shared/
+│       ├── data/
+│       │   └── tools.ts
 │       ├── types/
-│       │   └── errors.ts         # AppError class, HttpStatus constants, isAppError guard
+│       │   ├── errors.ts
+│       │   ├── faq.ts
+│       │   ├── seo.ts
+│       │   └── toolDetails.ts
 │       └── utils/
-│           ├── catchAsync.ts     # Wrapper for async Express handlers
-│           ├── seo.ts            # buildSeoMeta() — builds meta/OG/JSON-LD per page
-│           └── seo.test.ts
-├── views/
-│   ├── layouts/
-│   │   └── main.pug              # Shared layout — header, footer, GA tag, cookie banner
-│   ├── partials/
-│   │   ├── ad-slot.pug
-│   │   ├── cookie-banner.pug
-│   │   ├── nav.pug
-│   │   ├── tool-faq.pug
-│   │   ├── tool-header.pug
-│   │   ├── tool-related.pug
-│   │   └── tool-result.pug
-│   ├── pages/
-│   │   ├── home.pug
-│   │   ├── info/
-│   │   │   └── faq.pug
-│   │   └── legal/
-│   │       ├── privacy.pug
-│   │       ├── terms.pug
-│   │       └── contact.pug
-│   └── errors/
-│       └── error.pug
-├── public/
+│           ├── catchAsync.ts
+│           ├── seoMeta.ts
+│           └── seoMeta.test.ts
+│
+├── dist/                                 # Compiled JS output (mirrors src/)
+│
+├── public/                               # Static assets
 │   ├── css/
-│   │   └── main.css              # Monochrome design system
+│   │   └── main.css
 │   ├── images/
 │   │   └── favicon.ico
 │   ├── js/
-│   │   └── main.js               # Vanilla JS — mobile nav, cookie banner, copy button
+│   │   ├── main.js
+│   │   └── tools/
+│   │       ├── pocet-znaku.js
+│   │       └── prevod-velikosti-znaku.js
 │   ├── robots.txt
 │   └── sitemap.xml
-├── .github/
-│   └── workflows/
-│       └── ci.yml                # GitHub Actions CI pipeline
-├── .env.example
-├── package.json
-├── tsconfig.json
-└── vitest.config.ts
+│
+└── views/                                # Pug templates
+    ├── errors/
+    │   └── error.pug
+    ├── layouts/
+    │   └── main.pug
+    ├── pages/
+    │   ├── core/
+    │   │   ├── home.pug
+    │   │   ├── info/
+    │   │   │   └── faq.pug
+    │   │   └── legal/
+    │   │       ├── contact.pug
+    │   │       ├── privacy.pug
+    │   │       └── terms.pug
+    │   └── tools/
+    │       └── text/
+    │           ├── text.pug
+    │           ├── pocet-znaku.pug
+    │           └── prevod-velikosti-znaku.pug
+    └── partials/
+        ├── ad-slot.pug
+        ├── nav.pug
+        ├── tool-faq.pug
+        ├── tool-header.pug
+        └── tool-related.pug
 ```
 
 ---
@@ -200,13 +238,14 @@ Environment variables in CI are stored as GitHub Actions secrets and variables �
 
 | Tool | Route | Status |
 |---|---|---|
-| — | — | — |
+| Character count | `/pocet-znaku` | Live |
+| Uppercase / lowercase / title case converter | `/prevod-velikosti-znaku` | Live |
 
 ### In Progress
 
 | Tool | Route | Status |
 |---|---|---|
-| Character counter | `/pocet-znaku` | Service + tests complete, controller pending |
+| JSON validator | `/json-validator` | Pending |
 
 ### Planned
 
@@ -214,8 +253,6 @@ Environment variables in CI are stored as GitHub Actions secrets and variables �
 
 | Tool | Route |
 |---|---|
-| Uppercase / lowercase / title case converter | `/prevod-velkych-malych-pismen` |
-| Whitespace and line break cleaner | `/cisteni-textu` |
 | Duplicate line remover | `/odstranit-duplicitni-radky` |
 | Prefix / suffix per line | `/pridat-prefix-suffix` |
 | Delimited column extractor | `/vybrat-sloupec-z-textu` |
