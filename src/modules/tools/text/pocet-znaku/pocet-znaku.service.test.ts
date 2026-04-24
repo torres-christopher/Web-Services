@@ -175,4 +175,37 @@ describe('calculatePocetZnaku', () => {
     expect(result.lineCount).toBe(1)
     expect(result.readingTime).toBe(1)
   })
+
+  // Arabic text
+  it('Handles Arabic text', () => {
+    const input = 'مرحبا بالعالم'
+    const result = calculatePocetZnaku(input)
+    expect(result.textLengthRaw).toBe(13)
+    expect(result.textLengthNoSpace).toBe(12)
+    expect(result.wordCount).toBe(2)
+    expect(result.sentenceCount).toBe(1)
+    expect(result.lineCount).toBe(1)
+    expect(result.readingTime).toBe(1)
+  })
+
+  // Cyrillic text
+  it('Handles Cyrillic text', () => {
+    const input = 'Привет мир'
+    const result = calculatePocetZnaku(input)
+    expect(result.textLengthRaw).toBe(10)
+    expect(result.textLengthNoSpace).toBe(9)
+    expect(result.wordCount).toBe(2)
+    expect(result.sentenceCount).toBe(1)
+    expect(result.lineCount).toBe(1)
+    expect(result.readingTime).toBe(1)
+  })
+
+  // Chinese text
+  it('Handles Chinese text', () => {
+    const input = '你好世界'
+    const result = calculatePocetZnaku(input)
+    expect(result.textLengthRaw).toBe(4)
+    expect(result.textLengthNoSpace).toBe(4)
+    expect(result.lineCount).toBe(1)
+  })
 })

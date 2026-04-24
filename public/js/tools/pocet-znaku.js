@@ -14,13 +14,11 @@ function calculate(text) {
   // Text without space
   const textLengthNoSpace = text.replace(/\s/g, '').length
   // Words
-  const wordHasLetters = text.match(/[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]+/g)
+  const wordHasLetters = text.match(/\p{L}+/gu)
   const wordCount = whiteSpaceCheck ? 0 : wordHasLetters ? wordHasLetters.length : 0
   // Sentences
-  const sentenceHasLetters = !text.match(/[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]/)
-  const sentenceHasWords = text.match(
-    /[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]{3,}[.?!]+\s+[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]/g,
-  )
+  const sentenceHasLetters = !text.match(/\p{L}/u)
+  const sentenceHasWords = text.match(/\p{L}{3,}[.?!]+\s+\p{Lu}/gu)
   const sentenceCount = whiteSpaceCheck
     ? 0
     : sentenceHasLetters

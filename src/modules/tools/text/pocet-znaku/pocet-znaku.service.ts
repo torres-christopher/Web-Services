@@ -25,7 +25,7 @@ const calculateTextLengthNoSpace = function (input: pocetZnakuInput): number {
 // Word amount
 const calculateWordCount = function (input: pocetZnakuInput): number {
   if (isWhitespaceString(input)) return 0
-  const words = input.match(/[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]+/g)
+  const words = input.match(/\p{L}+/gu)
   return words ? words.length : 0
 }
 
@@ -34,12 +34,10 @@ const calculateSentenceCount = function (input: pocetZnakuInput): number {
   if (isWhitespaceString(input)) return 0
 
   // Strip text that has no real words at all
-  if (!input.match(/[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]/)) return 0
+  if (!input.match(/\p{L}/u)) return 0
 
   // Count boundaries — word of 4+ chars, then punctuation, then capital
-  const boundaries = input.match(
-    /[a-zA-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]{3,}[.?!]+\s+[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]/g,
-  )
+  const boundaries = input.match(/\p{L}{3,}[.?!]+\s+\p{Lu}/gu)
   const boundaryCount = boundaries ? boundaries.length : 0
 
   return boundaryCount + 1

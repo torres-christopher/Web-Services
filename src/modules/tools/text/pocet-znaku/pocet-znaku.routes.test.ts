@@ -2,14 +2,17 @@ import request from 'supertest'
 import { describe, it, expect } from 'vitest'
 import { app } from '../../../../app.js'
 
-describe('POST /text/pocet-znaku', () => {
+// Path
+const path = '/textove-nastroje/pocet-znaku'
+
+describe('POST /textove-nastroje/pocet-znaku', () => {
   it('GET returns 200', async () => {
-    await request(app).get('/text/pocet-znaku').expect(200)
+    await request(app).get(path).expect(200)
   })
 
   it('POST with valid text returns 200 and renders result', async () => {
     await request(app)
-      .post('/text/pocet-znaku')
+      .post(path)
       .type('form') // Send as form
       .send({ text: 'Lorem ipsum dolor' }) // req.body.text
       .expect(200)
@@ -22,7 +25,7 @@ describe('POST /text/pocet-znaku', () => {
   it('POST with text over 100000 chars returns 400 and renders error', async () => {
     const longText = 'a'.repeat(100001) // 100.001 characters
     await request(app)
-      .post('/text/pocet-znaku')
+      .post(path)
       .type('form')
       .send({ text: longText })
       .expect(400) // Error set in controller
@@ -33,7 +36,7 @@ describe('POST /text/pocet-znaku', () => {
 
   it('POST with empty body handles gracefully', async () => {
     await request(app)
-      .post('/text/pocet-znaku')
+      .post(path)
       .type('form')
       .send({}) // empty body — no text field at all
       .expect(200)
@@ -41,7 +44,7 @@ describe('POST /text/pocet-znaku', () => {
 
   it('POST with no body handles gracefully', async () => {
     await request(app)
-      .post('/text/pocet-znaku')
+      .post(path)
       .type('form')
       .send({ text: null }) // Null value in text
       .expect(200)
