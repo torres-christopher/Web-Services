@@ -35,7 +35,7 @@ export const postPrevodVelikostiZnaku = catchAsync(async (req, res) => {
   // On error
   if (!input.success) {
     errorState = true
-    errorMessage = 'Text je příliš dlouhý. Maximální délka je 100 000 znaků.'
+    errorMessage = 'Text je příliš dlouhý. Maximální délka je 300 000 znaků.'
     status = 400
   } else {
     switch (input.data.conversionType) {

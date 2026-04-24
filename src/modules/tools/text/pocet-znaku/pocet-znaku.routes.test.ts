@@ -23,7 +23,7 @@ describe('POST /textove-nastroje/pocet-znaku', () => {
   })
 
   it('POST with text over 300000 chars returns 400 and renders error', async () => {
-    const longText = 'a'.repeat(300001) // 100.001 characters
+    const longText = 'a'.repeat(300001) // 300.001 characters
     await request(app)
       .post(path)
       .type('form')
