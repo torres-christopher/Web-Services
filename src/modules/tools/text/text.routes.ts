@@ -8,7 +8,7 @@ const router = Router()
 
 // Category index/text
 router.get('/', (_req, res) => {
-  res.render('pages/tools/text/text', {
+  res.render('pages/tools/tools', {
     ...buildSeoMeta({
       title: 'Textové nástroje',
       description:
