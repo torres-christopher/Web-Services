@@ -11,5 +11,6 @@ export const tools: ToolsDetails[] = [
     categoryName: 'Textové nástoje',
     categoryPath: '/textove-nastroje',
     enabled: true,
+    featured: 1,
   },
 ]

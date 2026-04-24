@@ -7,4 +7,5 @@ export interface ToolsDetails {
   categoryName: string
   categoryPath: string
   enabled: boolean
+  featured: number | null
 }

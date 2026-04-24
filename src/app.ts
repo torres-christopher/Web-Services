@@ -36,7 +36,7 @@ app.use(localsMiddleware)
 app.use('/', coreRoutes)
 
 // Text tool routes
-app.use('/text', textRouter)
+app.use('/textove-nastroje', textRouter)
 
 // 404
 app.use(notFoundHandler)
