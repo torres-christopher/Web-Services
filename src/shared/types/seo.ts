@@ -1,6 +1,12 @@
-import type { ToolsDetails } from './toolDetails.js'
-
-export type SeoInput = Omit<ToolsDetails, 'icon' | 'slug' | 'enabled'>
+export interface SeoInput {
+  title: string
+  description: string
+  path: string
+  categoryName?: string
+  categoryPath?: string
+  toolName?: string
+  toolPath?: string
+}
 
 export interface SeoMeta {
   // For all

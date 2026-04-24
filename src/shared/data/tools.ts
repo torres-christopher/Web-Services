@@ -1,4 +1,4 @@
-import { type ToolsDetails } from '../../src/shared/types/toolDetails.js'
+import { type ToolsDetails } from '../types/toolDetails.js'
 
 export const tools: ToolsDetails[] = [
   {
