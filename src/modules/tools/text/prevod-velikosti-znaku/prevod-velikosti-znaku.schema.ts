@@ -12,5 +12,5 @@ export const prevodVelikostiZnakuInput = z.object({
 })
 export const prevodVelikostiZnakuOutput = z.string().max(300000).default('')
 
-export type prevodVelikostiZnakuInput = z.infer<typeof prevodVelikostiZnakuInput>
-export type prevodVelikostiZnakuOutput = z.infer<typeof prevodVelikostiZnakuOutput>
+export type PrevodVelikostiZnakuInput = z.infer<typeof prevodVelikostiZnakuInput>
+export type PrevodVelikostiZnakuOutput = z.infer<typeof prevodVelikostiZnakuOutput>

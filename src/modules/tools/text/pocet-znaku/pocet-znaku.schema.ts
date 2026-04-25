@@ -12,5 +12,5 @@ export const pocetZnakuOutput = z.object({
   readingTime: z.number().int().nonnegative(),
 })
 
-export type pocetZnakuInput = z.infer<typeof pocetZnakuInput>
-export type pocetZnakuOutput = z.infer<typeof pocetZnakuOutput>
+export type PocetZnakuInput = z.infer<typeof pocetZnakuInput>
+export type PocetZnakuOutput = z.infer<typeof pocetZnakuOutput>
