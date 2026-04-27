@@ -1,5 +1,6 @@
 import { catchAsync } from '../../../../shared/utils/catchAsync.js'
 import { buildSeoMeta } from '../../../../shared/utils/seoMeta.js'
+import { tools } from '../../../../shared/data/tools.js'
 import { prevodVelikostiZnakuInput } from './prevod-velikosti-znaku.schema.js'
 import {
   sentenceCase,
@@ -9,8 +10,8 @@ import {
   reverseText,
 } from './prevod-velikosti-znaku.service.js'
 import { prevodVelikostiZnakuFaq as faq } from './prevod-velikosti-znaku.faq.js'
-import { tools } from '../../../../shared/data/tools.js'
 
+// Get tool details
 const tool = tools.find((t) => t.slug === 'prevod-velikosti-znaku')
 if (!tool) throw new Error('Tool not found: prevod-velikosti-znaku')
 
