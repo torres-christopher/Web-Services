@@ -153,7 +153,7 @@ describe('/vyvojarske-nastroje/json-validator', () => {
   })
 
   // Empty value
-  it('POST with JSON and minify button returns minified string', async () => {
+  it('POST with empty string handles gracefully', async () => {
     await request(app)
       .post(path)
       .type('form') // Send as form
@@ -170,7 +170,7 @@ describe('/vyvojarske-nastroje/json-validator', () => {
   })
 
   // Non-JSON string
-  it('POST with JSON and minify button returns minified string', async () => {
+  it('POST with not-JSON handles gracefully', async () => {
     await request(app)
       .post(path)
       .type('form') // Send as form
