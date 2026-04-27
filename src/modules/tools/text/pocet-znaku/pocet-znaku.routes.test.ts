@@ -5,7 +5,7 @@ import { app } from '../../../../app.js'
 // Path
 const path = '/textove-nastroje/pocet-znaku'
 
-describe('POST /textove-nastroje/pocet-znaku', () => {
+describe('/textove-nastroje/pocet-znaku', () => {
   it('GET returns 200', async () => {
     await request(app).get(path).expect(200)
   })

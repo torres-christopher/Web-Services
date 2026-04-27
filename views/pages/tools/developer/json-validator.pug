@@ -1,0 +1,226 @@
+extends ../../../layouts/main
+
+block content
+  //- Tool header — breadcrumb + title
+  include ../../../partials/tool-header
+
+  .tool-layout
+    .container
+
+      //- ── Error banner (schema/request level) ────────────────
+      if errorMessage && !result
+        .alert.alert--error(role='alert')
+          p= errorMessage
+
+      //- ── Two-panel editor ───────────────────────────────────
+      form#json-form(method='POST' action='/vyvojarske-nastroje/json-validator')
+
+        //- Action bar
+        .json-toolbar
+          .json-toolbar__actions
+            button.btn.btn--primary(type='submit' name='actionType' value='validate') Validovat
+            button.btn.btn--ghost(type='submit' name='actionType' value='format') Formátovat
+            button.btn.btn--ghost(type='submit' name='actionType' value='minify') Minifikovat
+          .json-toolbar__options
+            label.json-toolbar__label(for='space') Odsazení
+            select#space.form-select.json-toolbar__select(name='space')
+              each val in [1,2,3,4,6,8]
+                option(value=val selected=(space == val))= val + (val === 1 ? ' mezera' : ' mezery')
+
+        //- Split panels
+        .json-panels
+          //- Input
+          .json-panel
+            .json-panel__header
+              span.json-panel__label Vstup
+              if result
+                span.json-panel__meta #{inputLength || 0} znaků
+            textarea.json-panel__editor(
+              id='text'
+              name='text'
+              placeholder='Sem vložte JSON...'
+              autocomplete='off'
+              spellcheck='false'
+            )= text || ''
+
+          //- Output
+          .json-panel
+            .json-panel__header
+              if result
+                if result.validJson
+                  span.json-panel__badge.json-panel__badge--valid ✓ Validní JSON
+                else
+                  span.json-panel__badge.json-panel__badge--invalid ✗ Nevalidní JSON
+              else
+                span.json-panel__label Výstup
+              if result && result.validJson && result.result
+                button.btn.btn--sm.btn--ghost#copy-btn(type='button') Kopírovat
+
+            if result
+              if result.validJson
+                textarea.json-panel__editor.json-panel__editor--output(
+                  readonly
+                  spellcheck='false'
+                  id='output-text'
+                )= result.result || ''
+              else
+                .json-panel__error
+                  if result.errorPosition && (result.errorPosition.line || result.errorPosition.column)
+                    p.json-panel__error-location
+                      | Řádek #{result.errorPosition.line}, sloupec #{result.errorPosition.column}
+                  if result.errorMessage
+                    p.json-panel__error-message= result.errorMessage
+                  if errorMessage
+                    p.json-panel__error-message= errorMessage
+            else
+              textarea.json-panel__editor.json-panel__editor--output(
+                readonly
+                placeholder='Výsledek se zobrazí zde...'
+                spellcheck='false'
+                id='output-text'
+              )
+
+      //- ── Tool FAQ ───────────────────────────────────────────
+      include ../../../partials/tool-faq
+
+      //- ── Related tools ──────────────────────────────────────
+      include ../../../partials/tool-related
+
+  //- Scoped styles for two-panel layout
+  style.
+    .json-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      flex-wrap: wrap;
+    }
+    .json-toolbar__actions {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+    .json-toolbar__options {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .json-toolbar__label {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--c-text-muted);
+      white-space: nowrap;
+    }
+    .json-toolbar__select {
+      width: auto;
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--text-sm);
+    }
+    .json-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    .json-panel {
+      display: flex;
+      flex-direction: column;
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--c-surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .json-panel__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-4);
+      background: var(--c-bg-alt);
+      border-bottom: 1px solid var(--c-border);
+      min-height: 44px;
+      gap: var(--space-3);
+    }
+    .json-panel__label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--c-text-muted);
+    }
+    .json-panel__meta {
+      font-size: var(--text-xs);
+      color: var(--c-text-subtle);
+    }
+    .json-panel__badge {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      letter-spacing: 0.02em;
+    }
+    .json-panel__badge--valid {
+      background: var(--c-success-bg);
+      color: var(--c-success);
+      border: 1px solid var(--c-success);
+    }
+    .json-panel__badge--invalid {
+      background: var(--c-error-bg);
+      color: var(--c-error);
+      border: 1px solid var(--c-error);
+    }
+    .json-panel__editor {
+      flex: 1;
+      width: 100%;
+      min-height: 480px;
+      padding: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+      color: var(--c-text);
+      background: var(--c-surface);
+      border: none;
+      resize: none;
+      outline: none;
+    }
+    .json-panel__editor--output {
+      background: var(--c-bg-alt);
+      color: var(--c-text-muted);
+    }
+    .json-panel__error {
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .json-panel__error-location {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--c-error);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .json-panel__error-message {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--c-text-muted);
+      line-height: 1.7;
+      background: var(--c-error-bg);
+      border: 1px solid var(--c-error);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+    @media (max-width: 768px) {
+      .json-panels {
+        grid-template-columns: 1fr;
+      }
+      .json-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .json-toolbar__options {
+        justify-content: space-between;
+      }
+    }
+
+  script(src='/js/tools/json-validator.js' defer)
