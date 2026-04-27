@@ -26,7 +26,7 @@ export const tools: ToolsDetails[] = [
     featured: 2,
   },
   {
-    title: 'Formátování a validate JSONu',
+    title: 'Formátování a validace JSONu',
     description:
       'Validujte, formátujte a minifikujte JSON text. Podporuje češtinu, azbuku i arabštinu.',
     path: '/vyvojarske-nastroje/json-validator',

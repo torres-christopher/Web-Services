@@ -17,7 +17,7 @@ router.get('/', (_req, res) => {
     }),
     toolCategory: 'Textové nástroje',
     toolCategoryPath: '/textove-nastroje',
-    tools: tools.filter((t) => t.enabled).slice(0, 6),
+    tools: tools.filter((t) => t.categoryPath === '/textove-nastroje' && t.enabled),
   })
 })
 

@@ -83,7 +83,7 @@ if (cookieBanner) {
 
 // ── Copy button ────────────────────────────────────────────
 
-document.querySelectorAll('.copy-btn').forEach((btn) => {
+document.querySelectorAll('#copy-btn').forEach((btn) => {
   btn.addEventListener('click', async () => {
     const targetSelector = btn.getAttribute('data-copy-target')
     if (!targetSelector) return
