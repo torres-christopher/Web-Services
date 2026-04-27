@@ -26,8 +26,8 @@ export const jsonValidateFormat = function (input: JsonValidatorInput): JsonVali
       validJson: valid.valid,
       errorMessage: valid.errorMessage,
       errorPosition: {
-        line: valid.line ? valid.line : 0,
-        column: valid.column ? valid.column : 0,
+        line: valid.line ? valid.line : null,
+        column: valid.column ? valid.column : null,
       },
     }
   }
@@ -39,8 +39,8 @@ interface ValidateJson {
   valid: boolean
   jsonObject?: JsonValue
   errorMessage?: string
-  line?: number
-  column?: number
+  line?: number | null
+  column?: number | null
 }
 
 // Validate
@@ -53,13 +53,17 @@ const validateJSON = function (input: string): ValidateJson {
   } catch (error) {
     // Check for SyntaxError otherwise error is of type unknown
     if (error instanceof SyntaxError) {
-      const line = error.message.split('line ')[1].split('column')[0]
-      const column = error.message.split('column ')[1].split(')')[0]
+      const line = error.message.includes('line') // Check that error message has line # string
+        ? error.message.split('line ')[1].split('column')[0]
+        : null
+      const column = error.message.includes('column') // Check that error message has column # string
+        ? error.message.split('column ')[1].split(')')[0]
+        : null
       return {
         valid: false,
         errorMessage: error.message,
-        line: line ? Number(line) : 0,
-        column: column ? Number(column) : 0,
+        line: line ? Number(line) : null,
+        column: column ? Number(column) : null,
       }
     }
     // Edge case for non-Syntax errors

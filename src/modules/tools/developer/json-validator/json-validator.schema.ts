@@ -11,8 +11,8 @@ export const jsonValidatorOutput = z.object({
   errorMessage: z.string().optional(),
   errorPosition: z
     .object({
-      line: z.number(),
-      column: z.number(),
+      line: z.number().nullable(),
+      column: z.number().nullable(),
     })
     .optional(),
   result: z.string().optional(),
