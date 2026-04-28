@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { type prevodVelikostiZnakuInput } from './prevod-velikosti-znaku.schema.js'
+import { type PrevodVelikostiZnakuInput } from './prevod-velikosti-znaku.schema.js'
 import {
   sentenceCase,
   lowerCase,
@@ -11,7 +11,7 @@ import {
 describe('Case converter', () => {
   // Sentence Case
   it('Correctly capitalizes first letter of each sentence', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'lOrEm iPsUm dOlOr sIt aMeT. cOnSeCtEtUr aDiPiScInG ElIt! SeD Do eIuSmOd tEmPoR InCiDiDuNt uT LaBoRe eT DoLoRe mAgNa aLiQuA? tEnIm aD MiNiM VeNiAm, QuIs nOsTrUd eXeRcItAtIoN UlLaMcO LaBoRiS NiSi uT AlIqUiP Ex eA CoMmOdO CoNsEqUaT.',
       conversionType: 'sentence-case',
     }
@@ -23,7 +23,7 @@ describe('Case converter', () => {
 
   // Lower Case
   it('Correctly changes all letters to lowercase', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'lOrEm iPsUm dOlOr sIt aMeT. cOnSeCtEtUr aDiPiScInG ElIt! SeD Do eIuSmOd tEmPoR InCiDiDuNt uT LaBoRe eT DoLoRe mAgNa aLiQuA? tEnIm aD MiNiM VeNiAm, QuIs nOsTrUd eXeRcItAtIoN UlLaMcO LaBoRiS NiSi uT AlIqUiP Ex eA CoMmOdO CoNsEqUaT.',
       conversionType: 'lower-case',
     }
@@ -35,7 +35,7 @@ describe('Case converter', () => {
 
   // Upper Case
   it('Correctly changes all letters to upper cases', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'lorem ipsum dolor sit amet. consectetur adipiscing elit! sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       conversionType: 'upper-case',
     }
@@ -47,7 +47,7 @@ describe('Case converter', () => {
 
   // Capitalized Case
   it('Correctly capitalizes each first letter of a word', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'lorem ipsum dolor sit amet. consectetur adipiscing elit! sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       conversionType: 'capitalized-case',
     }
@@ -59,7 +59,7 @@ describe('Case converter', () => {
 
   // Reverse text
   it('Correctly reverses the string', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'Lorem ipsum dolor sit amet. Consectetur adipiscing elit! Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? Tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       conversionType: 'reverse',
     }
@@ -71,7 +71,7 @@ describe('Case converter', () => {
 
   // Cyrillic - Sentence Case
   it('Correctly capitalizes first letter of each Cyrillic sentence', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'привет мир. как дела!',
       conversionType: 'sentence-case',
     }
@@ -81,7 +81,7 @@ describe('Case converter', () => {
 
   // Cyrillic - Lower Case
   it('Correctly lowercases Cyrillic text', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'ПРИВЕТ МИР',
       conversionType: 'lower-case',
     }
@@ -91,7 +91,7 @@ describe('Case converter', () => {
 
   // Cyrillic - Upper Case
   it('Correctly uppercases Cyrillic text', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'привет мир',
       conversionType: 'upper-case',
     }
@@ -101,7 +101,7 @@ describe('Case converter', () => {
 
   // Cyrillic - Capitalized Case
   it('Correctly capitalizes each Cyrillic word', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'привет мир',
       conversionType: 'capitalized-case',
     }
@@ -111,7 +111,7 @@ describe('Case converter', () => {
 
   // Cyrillic - Reverse
   it('Correctly reverses Cyrillic text', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'привет мир',
       conversionType: 'reverse',
     }
@@ -121,7 +121,7 @@ describe('Case converter', () => {
 
   // Arabic - Lower Case (Arabic has no case — should return unchanged)
   it('Returns Arabic text unchanged on lowerCase', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'مرحبا بالعالم',
       conversionType: 'lower-case',
     }
@@ -131,7 +131,7 @@ describe('Case converter', () => {
 
   // Arabic - Upper Case (Arabic has no case — should return unchanged)
   it('Returns Arabic text unchanged on upperCase', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'مرحبا بالعالم',
       conversionType: 'upper-case',
     }
@@ -141,7 +141,7 @@ describe('Case converter', () => {
 
   // Arabic - Reverse
   it('Correctly reverses Arabic text', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: 'مرحبا',
       conversionType: 'reverse',
     }
@@ -151,7 +151,7 @@ describe('Case converter', () => {
 
   // Chinese - Reverse
   it('Correctly reverses Chinese text', () => {
-    const input: prevodVelikostiZnakuInput = {
+    const input: PrevodVelikostiZnakuInput = {
       text: '你好世界',
       conversionType: 'reverse',
     }

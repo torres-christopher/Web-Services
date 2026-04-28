@@ -1,0 +1,96 @@
+extends ../../../layouts/main
+
+block content
+  //- Tool header — breadcrumb + title
+  include ../../../partials/tool-header
+
+  .tool-layout
+    .container-wide
+
+      //- ── Error banner (schema/request level) ────────────────
+      if errorMessage && !result
+        .alert.alert--error(role='alert')
+          p= errorMessage
+
+      //- ── Two-panel editor ───────────────────────────────────
+      form#json-form(method='POST' action='/vyvojarske-nastroje/json-validator')
+
+        //- Action bar
+        .json-toolbar
+          .json-toolbar__actions
+            button.btn.btn--primary(type='submit' name='actionType' value='validate') Validovat
+            button.btn.btn--ghost(type='submit' name='actionType' value='format') Formátovat
+            button.btn.btn--ghost(type='submit' name='actionType' value='minify') Minifikovat
+          .json-toolbar__options
+            label.json-toolbar__label(for='space') Odsazení
+            select#space.form-select.json-toolbar__select(name='space')
+              each val in spaceValues
+                option(value=val.value selected=(space == val.value))= val.name
+
+        //- Split panels
+        .json-panels
+
+          //- ── Input panel ──────────────────────────────────
+          .json-panel
+            .json-panel__header
+              span.json-panel__label Vstup
+              if result
+                span.json-panel__meta #{inputLength || 0} znaků
+            //- No-JS fallback textarea
+            textarea#text.json-panel__editor(
+              name='text'
+              placeholder='Sem vložte JSON...'
+              autocomplete='off'
+              spellcheck='false'
+            )= text || ''
+            //- Ace editor for input
+            #ace-input.json-panel__ace
+
+          //- ── Output panel ─────────────────────────────────
+          .json-panel
+            .json-panel__header
+              if result
+                if result.validJson
+                  span.json-panel__badge.json-panel__badge--valid ✓ Validní JSON
+                else
+                  span.json-panel__badge.json-panel__badge--invalid ✗ Nevalidní JSON
+              else
+                span.json-panel__label Výstup
+              if result && result.validJson && result.result
+                button.btn.btn--sm.btn--ghost#copy-btn(type='button' data-copy-target='#output-text') Kopírovat
+
+            if result
+              if result.validJson
+                textarea#output-text.json-panel__editor.json-panel__editor--output(
+                  readonly
+                  spellcheck='false'
+                )!= result.result || ''
+                #ace-output.json-panel__ace
+              else
+                .json-panel__error
+                  if result.errorPosition && (result.errorPosition.line || result.errorPosition.column)
+                    p.json-panel__error-location
+                      | Řádek #{result.errorPosition.line}, sloupec #{result.errorPosition.column}
+                  if result.errorMessage
+                    p.json-panel__error-message= result.errorMessage
+                  else if errorMessage
+                    p.json-panel__error-message= errorMessage
+                textarea#output-text.hidden
+                #ace-output.json-panel__ace.hidden
+            else
+              textarea#output-text.json-panel__editor.json-panel__editor--output(
+                readonly
+                placeholder='Výsledek se zobrazí zde...'
+                spellcheck='false'
+              )
+              #ace-output.json-panel__ace
+
+      //- ── Tool FAQ ───────────────────────────────────────────
+      include ../../../partials/tool-faq
+
+      //- ── Related tools ──────────────────────────────────────
+      include ../../../partials/tool-related
+
+block scripts
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.43.3/ace.js')
+  script(src='/js/tools/json-validator.js' defer)

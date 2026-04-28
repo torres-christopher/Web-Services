@@ -10,6 +10,7 @@ import { errorHandler } from './middleware/error-handler.js'
 import coreRoutes from './modules/core/core.routes.js'
 // Routes - Tools
 import textRouter from './modules/tools/text/text.routes.js'
+import developerRouter from './modules/tools/developer/developer.routes.js'
 
 // Initialise dirname and filename (NodeNext does not allow)
 const __filename = fileURLToPath(import.meta.url)
@@ -35,8 +36,9 @@ app.use(localsMiddleware)
 // Core routes
 app.use('/', coreRoutes)
 
-// Text tool routes
+//Tool routes
 app.use('/textove-nastroje', textRouter)
+app.use('/vyvojarske-nastroje', developerRouter)
 
 // 404
 app.use(notFoundHandler)

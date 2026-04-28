@@ -1,10 +1,11 @@
 import { catchAsync } from '../../../../shared/utils/catchAsync.js'
 import { buildSeoMeta } from '../../../../shared/utils/seoMeta.js'
+import { tools } from '../../../../shared/data/tools.js'
 import { pocetZnakuInput } from './pocet-znaku.schema.js'
 import { calculatePocetZnaku } from './pocet-znaku.service.js'
 import { pocetZnakuFaq as faq } from './pocet-znaku.faq.js'
-import { tools } from '../../../../shared/data/tools.js'
 
+// Get tool details
 const tool = tools.find((t) => t.slug === 'pocet-znaku')
 if (!tool) throw new Error('Tool not found: pocet-znaku')
 
