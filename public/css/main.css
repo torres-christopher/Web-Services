@@ -1759,7 +1759,7 @@ code {
   color: var(--c-error);
   border: 1px solid var(--c-error);
 }
-.json-panel__editor {
+.json-panel__ace, .json-panel__editor {
   flex: 1;
   width: 100%;
   min-height: 480px;
@@ -1772,6 +1772,9 @@ code {
   border: none;
   resize: none;
   outline: none;
+}
+.json-panel__ace {
+  padding: 0;
 }
 .json-panel__editor--output {
   background: var(--c-bg-alt);

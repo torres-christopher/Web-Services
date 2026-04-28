@@ -37,6 +37,7 @@ export const postJsonValidator = catchAsync(async (req, res) => {
     ...buildSeoMeta(tool),
     faq,
     text: input.data?.text,
+    inputLength: input.data?.text.length,
     result: result,
     errorMessage: errorMessage ? errorMessage : result?.errorMessage,
     errorPosition: result?.errorPosition,
