@@ -31,6 +31,7 @@ if (!tool) throw new Error('Tool not found: json-validator')
 export const getJsonValidator = catchAsync(async (req, res) => {
   res.render('pages/tools/developer/json-validator', {
     ...buildSeoMeta(tool),
+    wideLayout: true,
     faq,
     spaceValues,
   })
@@ -55,6 +56,7 @@ export const postJsonValidator = catchAsync(async (req, res) => {
 
   res.status(status).render('pages/tools/developer/json-validator', {
     ...buildSeoMeta(tool),
+    wideLayout: true,
     faq,
     spaceValues,
     space: input.data?.space,

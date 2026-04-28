@@ -170,7 +170,7 @@ describe('/vyvojarske-nastroje/json-validator', () => {
   })
 
   // Non-JSON string
-  it('POST with not-JSON handles gracefully', async () => {
+  it('POST with JSON as null handles gracefully', async () => {
     await request(app)
       .post(path)
       .type('form') // Send as form
@@ -183,6 +183,39 @@ describe('/vyvojarske-nastroje/json-validator', () => {
       .expect((res) => {
         // res.text is the HTML
         expect(res.text).not.toContain(`Nevalidní JSON`)
+      })
+  })
+
+  // Empty value
+  it('POST with invalid JSON returns 200', async () => {
+    await request(app)
+      .post(path)
+      .type('form') // Send as form
+      .send({
+        text: `{"product: "Live JSON generator" }`,
+        actionType: 'validate',
+      }) // req.body.text
+      .expect(200)
+      .expect((res) => {
+        // res.text is the HTML
+        expect(res.text).toContain(`in JSON at position`)
+      })
+  })
+
+  // Too long value
+  it('POST with too JSON returns 400', async () => {
+    const longText = `{"product: "Live JSON generator"}`.repeat(10000) // 300.001 characters
+    await request(app)
+      .post(path)
+      .type('form') // Send as form
+      .send({
+        text: longText,
+        actionType: 'validate',
+      }) // req.body.text
+      .expect(400)
+      .expect((res) => {
+        // res.text is the HTML
+        expect(res.text).toContain(`příliš dlouhý`)
       })
   })
 })

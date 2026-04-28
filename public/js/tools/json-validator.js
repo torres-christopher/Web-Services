@@ -6,6 +6,13 @@ textAreas.forEach((textArea) => {
   textArea.hidden = true
 })
 
+// Show Ace divs
+const hasError = document.querySelector('.json-panel__error')
+if (!hasError) {
+  document.getElementById('ace-output').style.display = 'block'
+  document.getElementById('ace-input').style.display = 'block'
+}
+
 // Run editor on input
 var editorInput = ace.edit('ace-input')
 editorInput.setTheme('ace/theme/textmate')

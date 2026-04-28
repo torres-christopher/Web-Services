@@ -41,7 +41,7 @@ html(lang='cs')
   body
 
     header.site-header
-      .container
+      div(class=wideLayout ? 'container-wide' : 'container')
         .site-header__inner
           a.site-logo(href='/')
             span.site-logo__mark WS
@@ -58,7 +58,7 @@ html(lang='cs')
       block content
 
     footer.site-footer
-      .container
+      div(class=wideLayout ? 'container-wide' : 'container')
         .site-footer__grid
           .site-footer__brand
             a.site-logo.site-logo--footer(href='/')
