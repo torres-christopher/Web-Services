@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const jsonValidatorInput = z.object({
   text: z.string().max(100000).default(''),
   actionType: z.enum(['validate', 'format', 'minify']),
-  space: z.coerce.number().gte(1).lte(10).default(1),
+  space: z.union([z.literal('\t'), z.coerce.number().gte(1).lte(10)]),
 })
 
 export const jsonValidatorOutput = z.object({

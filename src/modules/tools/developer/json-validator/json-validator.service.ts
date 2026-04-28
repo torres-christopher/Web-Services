@@ -77,7 +77,7 @@ const validateJSON = function (input: string): ValidateJson {
 }
 
 // Format JSON
-const formatJSON = function (input: JsonValue, space: number): string {
+const formatJSON = function (input: JsonValue, space: number | string): string {
   return JSON.stringify(input, null, space)
 }
 

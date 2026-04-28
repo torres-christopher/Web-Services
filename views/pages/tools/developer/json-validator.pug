@@ -24,8 +24,8 @@ block content
           .json-toolbar__options
             label.json-toolbar__label(for='space') Odsazení
             select#space.form-select.json-toolbar__select(name='space')
-              each val in [1,2,3,4,6,8]
-                option(value=val selected=(space == val))= val + (val === 1 ? ' mezera' : ' mezery')
+              each val in spaceValues
+                option(value=val.value selected=(space == val.value))= val.name
 
         //- Split panels
         .json-panels
