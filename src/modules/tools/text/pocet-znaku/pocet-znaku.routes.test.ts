@@ -6,6 +6,7 @@ import { app } from '../../../../app.js'
 const path = '/textove-nastroje/pocet-znaku'
 
 describe('/textove-nastroje/pocet-znaku', () => {
+  // GET request
   it('GET returns 200', async () => {
     await request(app).get(path).expect(200)
   })
