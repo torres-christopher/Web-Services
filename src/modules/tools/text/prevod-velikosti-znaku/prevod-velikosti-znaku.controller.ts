@@ -23,15 +23,16 @@ export const getPrevodVelikostiZnaku = catchAsync(async (req, res) => {
 })
 
 export const postPrevodVelikostiZnaku = catchAsync(async (req, res) => {
+  let result = null
+  let errorState: boolean = false
+  let errorMessage: string | null = null
+  let status: number = 200
+
   // Validate input
   const input = prevodVelikostiZnakuInput.safeParse({
     text: req.body.text,
     conversionType: req.body.conversionType,
   })
-  let result = null
-  let errorState: boolean = false
-  let errorMessage: string | null = null
-  let status: number = 200
 
   // On error
   if (!input.success) {

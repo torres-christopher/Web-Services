@@ -17,12 +17,13 @@ export const getPocetZnaku = catchAsync(async (req, res) => {
 })
 
 export const postPocetZnaku = catchAsync(async (req, res) => {
-  // Validate input
-  const input = pocetZnakuInput.safeParse(req.body.text)
   let result = null
   let errorState: boolean = false
   let errorMessage: string | null = null
   let status: number = 200
+
+  // Validate input
+  const input = pocetZnakuInput.safeParse(req.body.text)
 
   // On error
   if (!input.success) {

@@ -5,7 +5,7 @@ import jsonValidatorRoutes from './json-validator/json-validator.routes.js'
 
 const router = Router()
 
-// Category index/text
+// Category index/developer
 router.get('/', (_req, res) => {
   res.render('pages/tools/tools', {
     ...buildSeoMeta({
@@ -16,7 +16,7 @@ router.get('/', (_req, res) => {
     }),
     toolCategory: 'Vývojářské nástroje',
     toolCategoryPath: '/vyvojarske-nastroje',
-    tools: tools.filter((t) => t.enabled).slice(0, 6),
+    tools: tools.filter((t) => t.categoryPath === '/vyvojarske-nastroje' && t.enabled).slice(0, 6),
   })
 })
 

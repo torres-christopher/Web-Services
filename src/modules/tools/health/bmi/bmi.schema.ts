@@ -15,7 +15,6 @@ export const bmiOutput = z.object({
     'obese-2',
     'obese-3',
   ]),
-  errorMessage: z.string().optional(),
 })
 
 export type BmiInput = z.infer<typeof bmiInput>

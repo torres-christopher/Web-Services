@@ -35,6 +35,18 @@ export const tools: ToolsDetails[] = [
     categoryName: 'Vývojářské nástroje',
     categoryPath: '/vyvojarske-nastroje',
     enabled: true,
-    featured: 3,
+    featured: 1,
+  },
+  {
+    title: 'BMI kalkulačka',
+    description:
+      'Spočítejte si BMI (Body Mass Index) podle své výšky a hmotnosti. Rychle, zdarma a bez registrace.',
+    path: '/zdravotni-nastroje/bmi-kalkulacka',
+    slug: 'bmi-kalkulacka',
+    icon: '⚖️',
+    categoryName: 'Zdravotní nástroje',
+    categoryPath: '/zdravotni-nastroje',
+    enabled: true,
+    featured: 1,
   },
 ]

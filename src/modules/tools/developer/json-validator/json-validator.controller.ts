@@ -38,15 +38,17 @@ export const getJsonValidator = catchAsync(async (req, res) => {
 })
 
 export const postJsonValidator = catchAsync(async (req, res) => {
+  let result = null
+  let errorMessage: string | null = null
+  let status: number = 200
+
   // Validate input
   const input = jsonValidatorInput.safeParse({
     text: req.body.text,
     actionType: req.body.actionType,
     space: req.body.space,
   })
-  let result = null
-  let errorMessage: string | null = null
-  let status: number = 200 // On error
+
   if (!input.success) {
     errorMessage = 'Text je příliš dlouhý. Maximální délka je 300 000 znaků.'
     status = 400

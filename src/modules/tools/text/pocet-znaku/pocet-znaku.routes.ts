@@ -1,7 +1,7 @@
-import express from 'express'
+import { Router } from 'express'
 import { getPocetZnaku, postPocetZnaku } from './pocet-znaku.controller.js'
 
-const router = express.Router()
+const router = Router()
 
 router.get('/', getPocetZnaku)
 router.post('/', postPocetZnaku)
