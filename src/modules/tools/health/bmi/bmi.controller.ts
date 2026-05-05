@@ -18,6 +18,8 @@ export const getBmi = catchAsync(async (req, res) => {
 
 export const postBmi = catchAsync(async (req, res) => {
   let result = null
+  let label: string | null = null
+  let markerPosition: number | null = null
   let errorMessage: string | null = null
   let status: number = 200
 
@@ -32,6 +34,30 @@ export const postBmi = catchAsync(async (req, res) => {
     status = 400
   } else {
     result = calculateBmi(input.data)
+    markerPosition = Math.min(100, Math.max(0, ((result.bmiValue - 10) / (45 - 10)) * 100))
+    switch (result.bmiClassification) {
+      case 'underweight':
+        label = 'Podváha'
+        break
+      case 'normal':
+        label = 'Optimální váha'
+        break
+      case 'overweight':
+        label = 'Nadváha'
+        break
+      case 'obese-1':
+        label = 'Obezita 1. stupně'
+        break
+      case 'obese-2':
+        label = 'Obezita 2. stupně'
+        break
+      case 'obese-3':
+        label = 'Obezita 3. stupně'
+        break
+      default:
+        label = 'Normální'
+        break
+    }
   }
 
   res.status(status).render('pages/tools/health/bmi', {
@@ -40,6 +66,8 @@ export const postBmi = catchAsync(async (req, res) => {
     height: input.data?.height,
     weight: input.data?.weight,
     result,
+    label,
+    markerPosition,
     errorMessage,
   })
 })
