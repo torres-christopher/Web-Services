@@ -9,7 +9,7 @@ export const calculateBmi = function (input: BmiInput): BmiOutput {
     | 'obese-1'
     | 'obese-2'
     | 'obese-3' = 'normal'
-  let errorMessage: string = ''
+
   if (bmiValue < 18.5) {
     bmiClassification = 'underweight'
   } else if (bmiValue < 25) {
@@ -22,12 +22,9 @@ export const calculateBmi = function (input: BmiInput): BmiOutput {
     bmiClassification = 'obese-2'
   } else if (bmiValue >= 40) {
     bmiClassification = 'obese-3'
-  } else {
-    errorMessage = 'Value out of bounds'
   }
   return {
     bmiValue,
     bmiClassification,
-    errorMessage,
   }
 }
