@@ -39,8 +39,7 @@ export const tools: ToolsDetails[] = [
   },
   {
     title: 'BMI kalkulačka',
-    description:
-      'Spočítejte si BMI (Body Mass Index) podle své výšky a hmotnosti. Rychle, zdarma a bez registrace.',
+    description: 'Spočítejte si BMI (Body Mass Index) podle své výšky a hmotnosti. ',
     path: '/zdravotni-nastroje/bmi-kalkulacka',
     slug: 'bmi-kalkulacka',
     icon: '⚖️',

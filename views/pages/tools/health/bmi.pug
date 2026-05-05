@@ -51,19 +51,11 @@ block content
               .tool-result__header
                 span.tool-result__heading Váš výsledek
               .tool-result__content
-                .stat-grid
-                  .stat-card
-                    .stat-card__value= result.bmiValue.toFixed(1)
-                    .stat-card__label BMI
-                  .stat-card
-                    .stat-card__value= height
-                    .stat-card__label Výška (cm)
-                  .stat-card
-                    .stat-card__value= weight
-                    .stat-card__label Váha (kg)
+                .bmi-result
+                  span.bmi-result__value= result.bmiValue.toFixed(1)
+                  span.bmi-result__label BMI              
                 .bmi-classification(class=`bmi-classification--${result.bmiClassification}`)
                   p.bmi-classification__label
-                    | Klasifikace:&nbsp;
                     strong= label
                 .bmi-scale
                   .bmi-scale__bar
@@ -86,7 +78,7 @@ block content
                       span.bmi-scale__segment-label Obezita III
                       span.bmi-scale__segment-range &gt; 40
                   .bmi-scale__track
-                    .bmi-scale__marker(style=`left: ${markerPosition}%`)
+                    .bmi-scale__marker(style=`--marker-pos: ${markerPosition}%; left: var(--marker-pos)`)
 
           //- Tool FAQ
           include ../../../partials/tool-faq

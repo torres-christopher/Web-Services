@@ -1924,8 +1924,13 @@ code {
   border-right: 8px solid transparent;
   border-bottom: 14px solid var(--c-text);
   top: 0;
+  animation: markerSlide 1s ease-out forwards;
 }
 
+@keyframes markerSlide {
+  from { left: 0; }
+  to { left: var(--marker-pos); }
+}
 
 .bmi-scale__segment--underweight { background: #e8f0f7; color: #1a3a5c; }
 .bmi-scale__segment--normal { background: var(--c-success-bg); color: var(--c-success); }
@@ -1948,4 +1953,29 @@ code {
   .bmi-scale__track {
     display: none;
   }
+}
+
+.bmi-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) 0;
+  gap: var(--space-2);
+}
+
+.bmi-result__value {
+  font-family: var(--font-display);
+  font-size: var(--text-6xl);
+  font-weight: 800;
+  color: var(--c-text);
+  line-height: 1;
+}
+
+.bmi-result__label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
