@@ -8,154 +8,134 @@ import {
   reverseText,
 } from './prevod-velikosti-znaku.service.js'
 
-describe('Case converter', () => {
-  // Sentence Case
+describe('sentenceCase', () => {
   it('Correctly capitalizes first letter of each sentence', () => {
     const input: PrevodVelikostiZnakuInput = {
       text: 'lOrEm iPsUm dOlOr sIt aMeT. cOnSeCtEtUr aDiPiScInG ElIt! SeD Do eIuSmOd tEmPoR InCiDiDuNt uT LaBoRe eT DoLoRe mAgNa aLiQuA? tEnIm aD MiNiM VeNiAm, QuIs nOsTrUd eXeRcItAtIoN UlLaMcO LaBoRiS NiSi uT AlIqUiP Ex eA CoMmOdO CoNsEqUaT.',
       conversionType: 'sentence-case',
     }
-    const result = sentenceCase(input)
-    expect(result).toBe(
+    expect(sentenceCase(input)).toBe(
       'Lorem ipsum dolor sit amet. Consectetur adipiscing elit! Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? Tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     )
   })
 
-  // Lower Case
-  it('Correctly changes all letters to lowercase', () => {
-    const input: PrevodVelikostiZnakuInput = {
-      text: 'lOrEm iPsUm dOlOr sIt aMeT. cOnSeCtEtUr aDiPiScInG ElIt! SeD Do eIuSmOd tEmPoR InCiDiDuNt uT LaBoRe eT DoLoRe mAgNa aLiQuA? tEnIm aD MiNiM VeNiAm, QuIs nOsTrUd eXeRcItAtIoN UlLaMcO LaBoRiS NiSi uT AlIqUiP Ex eA CoMmOdO CoNsEqUaT.',
-      conversionType: 'lower-case',
-    }
-    const result = lowerCase(input)
-    expect(result).toBe(
-      'lorem ipsum dolor sit amet. consectetur adipiscing elit! sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    )
-  })
-
-  // Upper Case
-  it('Correctly changes all letters to upper cases', () => {
-    const input: PrevodVelikostiZnakuInput = {
-      text: 'lorem ipsum dolor sit amet. consectetur adipiscing elit! sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      conversionType: 'upper-case',
-    }
-    const result = upperCase(input)
-    expect(result).toBe(
-      'LOREM IPSUM DOLOR SIT AMET. CONSECTETUR ADIPISCING ELIT! SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA? TENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT.',
-    )
-  })
-
-  // Capitalized Case
-  it('Correctly capitalizes each first letter of a word', () => {
-    const input: PrevodVelikostiZnakuInput = {
-      text: 'lorem ipsum dolor sit amet. consectetur adipiscing elit! sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      conversionType: 'capitalized-case',
-    }
-    const result = capitalizeCase(input)
-    expect(result).toBe(
-      'Lorem Ipsum Dolor Sit Amet. Consectetur Adipiscing Elit! Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua? Tenim Ad Minim Veniam, Quis Nostrud Exercitation Ullamco Laboris Nisi Ut Aliquip Ex Ea Commodo Consequat.',
-    )
-  })
-
-  // Reverse text
-  it('Correctly reverses the string', () => {
-    const input: PrevodVelikostiZnakuInput = {
-      text: 'Lorem ipsum dolor sit amet. Consectetur adipiscing elit! Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? Tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      conversionType: 'reverse',
-    }
-    const result = reverseText(input)
-    expect(result).toBe(
-      '.tauqesnoc odommoc ae xe piuqila tu isin sirobal ocmallu noitaticrexe durtson siuq ,mainev minim da mineT ?auqila angam erolod te erobal tu tnudidicni ropmet domsuie od deS !tile gnicsipida rutetcesnoC .tema tis rolod muspi meroL',
-    )
-  })
-
-  // Cyrillic - Sentence Case
   it('Correctly capitalizes first letter of each Cyrillic sentence', () => {
     const input: PrevodVelikostiZnakuInput = {
       text: 'привет мир. как дела!',
       conversionType: 'sentence-case',
     }
-    const result = sentenceCase(input)
-    expect(result).toBe('Привет мир. Как дела!')
+    expect(sentenceCase(input)).toBe('Привет мир. Как дела!')
+  })
+})
+
+describe('lowerCase', () => {
+  it('Correctly changes all letters to lowercase', () => {
+    const input: PrevodVelikostiZnakuInput = {
+      text: 'lOrEm iPsUm dOlOr sIt aMeT. cOnSeCtEtUr aDiPiScInG ElIt! SeD Do eIuSmOd tEmPoR InCiDiDuNt uT LaBoRe eT DoLoRe mAgNa aLiQuA? tEnIm aD MiNiM VeNiAm, QuIs nOsTrUd eXeRcItAtIoN UlLaMcO LaBoRiS NiSi uT AlIqUiP Ex eA CoMmOdO CoNsEqUaT.',
+      conversionType: 'lower-case',
+    }
+    expect(lowerCase(input)).toBe(
+      'lorem ipsum dolor sit amet. consectetur adipiscing elit! sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    )
   })
 
-  // Cyrillic - Lower Case
   it('Correctly lowercases Cyrillic text', () => {
     const input: PrevodVelikostiZnakuInput = {
       text: 'ПРИВЕТ МИР',
       conversionType: 'lower-case',
     }
-    const result = lowerCase(input)
-    expect(result).toBe('привет мир')
+    expect(lowerCase(input)).toBe('привет мир')
   })
 
-  // Cyrillic - Upper Case
+  it('Returns Arabic text unchanged', () => {
+    const input: PrevodVelikostiZnakuInput = {
+      text: 'مرحبا بالعالم',
+      conversionType: 'lower-case',
+    }
+    expect(lowerCase(input)).toBe('مرحبا بالعالم')
+  })
+})
+
+describe('upperCase', () => {
+  it('Correctly changes all letters to uppercase', () => {
+    const input: PrevodVelikostiZnakuInput = {
+      text: 'lorem ipsum dolor sit amet. consectetur adipiscing elit! sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      conversionType: 'upper-case',
+    }
+    expect(upperCase(input)).toBe(
+      'LOREM IPSUM DOLOR SIT AMET. CONSECTETUR ADIPISCING ELIT! SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA? TENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT.',
+    )
+  })
+
   it('Correctly uppercases Cyrillic text', () => {
     const input: PrevodVelikostiZnakuInput = {
       text: 'привет мир',
       conversionType: 'upper-case',
     }
-    const result = upperCase(input)
-    expect(result).toBe('ПРИВЕТ МИР')
+    expect(upperCase(input)).toBe('ПРИВЕТ МИР')
   })
 
-  // Cyrillic - Capitalized Case
+  it('Returns Arabic text unchanged', () => {
+    const input: PrevodVelikostiZnakuInput = {
+      text: 'مرحبا بالعالم',
+      conversionType: 'upper-case',
+    }
+    expect(upperCase(input)).toBe('مرحبا بالعالم')
+  })
+})
+
+describe('capitalizeCase', () => {
+  it('Correctly capitalizes each first letter of a word', () => {
+    const input: PrevodVelikostiZnakuInput = {
+      text: 'lorem ipsum dolor sit amet. consectetur adipiscing elit! sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      conversionType: 'capitalized-case',
+    }
+    expect(capitalizeCase(input)).toBe(
+      'Lorem Ipsum Dolor Sit Amet. Consectetur Adipiscing Elit! Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua? Tenim Ad Minim Veniam, Quis Nostrud Exercitation Ullamco Laboris Nisi Ut Aliquip Ex Ea Commodo Consequat.',
+    )
+  })
+
   it('Correctly capitalizes each Cyrillic word', () => {
     const input: PrevodVelikostiZnakuInput = {
       text: 'привет мир',
       conversionType: 'capitalized-case',
     }
-    const result = capitalizeCase(input)
-    expect(result).toBe('Привет Мир')
+    expect(capitalizeCase(input)).toBe('Привет Мир')
+  })
+})
+
+describe('reverseText', () => {
+  it('Correctly reverses the string', () => {
+    const input: PrevodVelikostiZnakuInput = {
+      text: 'Lorem ipsum dolor sit amet. Consectetur adipiscing elit! Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua? Tenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      conversionType: 'reverse',
+    }
+    expect(reverseText(input)).toBe(
+      '.tauqesnoc odommoc ae xe piuqila tu isin sirobal ocmallu noitaticrexe durtson siuq ,mainev minim da mineT ?auqila angam erolod te erobal tu tnudidicni ropmet domsuie od deS !tile gnicsipida rutetcesnoC .tema tis rolod muspi meroL',
+    )
   })
 
-  // Cyrillic - Reverse
   it('Correctly reverses Cyrillic text', () => {
     const input: PrevodVelikostiZnakuInput = {
       text: 'привет мир',
       conversionType: 'reverse',
     }
-    const result = reverseText(input)
-    expect(result).toBe('рим тевирп')
+    expect(reverseText(input)).toBe('рим тевирп')
   })
 
-  // Arabic - Lower Case (Arabic has no case — should return unchanged)
-  it('Returns Arabic text unchanged on lowerCase', () => {
-    const input: PrevodVelikostiZnakuInput = {
-      text: 'مرحبا بالعالم',
-      conversionType: 'lower-case',
-    }
-    const result = lowerCase(input)
-    expect(result).toBe('مرحبا بالعالم')
-  })
-
-  // Arabic - Upper Case (Arabic has no case — should return unchanged)
-  it('Returns Arabic text unchanged on upperCase', () => {
-    const input: PrevodVelikostiZnakuInput = {
-      text: 'مرحبا بالعالم',
-      conversionType: 'upper-case',
-    }
-    const result = upperCase(input)
-    expect(result).toBe('مرحبا بالعالم')
-  })
-
-  // Arabic - Reverse
   it('Correctly reverses Arabic text', () => {
     const input: PrevodVelikostiZnakuInput = {
       text: 'مرحبا',
       conversionType: 'reverse',
     }
-    const result = reverseText(input)
-    expect(result).toBe('ابحرم')
+    expect(reverseText(input)).toBe('ابحرم')
   })
 
-  // Chinese - Reverse
   it('Correctly reverses Chinese text', () => {
     const input: PrevodVelikostiZnakuInput = {
       text: '你好世界',
       conversionType: 'reverse',
     }
-    const result = reverseText(input)
-    expect(result).toBe('界世好你')
+    expect(reverseText(input)).toBe('界世好你')
   })
 })
