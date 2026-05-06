@@ -4,7 +4,7 @@
 // Formula: index[Y][M] = index[Y+1][M] / (1 + yoyRate[Y+1][M] / 100)
 // Last updated: March 2026
 
-export const cpi: Record<string, number> = {
+export const cpiMonthly: Record<string, number> = {
   '1997-01': 38.2,
   '1997-02': 38.26,
   '1997-03': 38.25,
@@ -356,4 +356,37 @@ export const cpi: Record<string, number> = {
   '2026-01': 100.9,
   '2026-02': 100.8,
   '2026-03': 101.4,
+}
+
+// Annual averages derived from cpiMonthly (arithmetic mean of 12 months)
+export const cpiYearly: Record<number, number> = {
+  1997: 39.75,
+  1998: 44,
+  1999: 44.92,
+  2000: 46.68,
+  2001: 48.86,
+  2002: 49.75,
+  2003: 49.8,
+  2004: 51.2,
+  2005: 52.16,
+  2006: 53.48,
+  2007: 55,
+  2008: 58.49,
+  2009: 59.1,
+  2010: 59.97,
+  2011: 61.11,
+  2012: 63.13,
+  2013: 64.02,
+  2014: 64.25,
+  2015: 64.46,
+  2016: 64.88,
+  2017: 66.46,
+  2018: 67.89,
+  2019: 69.83,
+  2020: 72.03,
+  2021: 74.81,
+  2022: 86.08,
+  2023: 95.29,
+  2024: 97.6,
+  2025: 100,
 }
