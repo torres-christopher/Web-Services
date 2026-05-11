@@ -2,11 +2,7 @@
 // 2015–2026: Table 4 (bazické indexy) direct values
 // 1997–2014: derived by chaining backwards via Table 2 YoY rates (january backwards, february backwards, ... all the way to 1997)
 // Formula: index[Y][M] = index[Y+1][M] / (1 + yoyRate[Y+1][M] / 100)
-// Last updated: March 2026
-
-// Last values
-export const CPI_MONTHLY_MAX = [2026, 3]
-export const CPI_YEARLY_MAX = 2025
+// Last updated: May 2026
 
 // CPI monthly
 export const cpiMonthly: Record<string, number> = {

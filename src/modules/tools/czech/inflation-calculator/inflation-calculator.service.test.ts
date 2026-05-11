@@ -39,7 +39,7 @@ describe('calculateCustomInflation', () => {
   it('Calculates correctly custom inflation output', () => {
     const input: InflationCustomInput = {
       value: 100,
-      interestRate: 3,
+      inflationRate: 3,
       years: 10,
       type: 'forward',
     }

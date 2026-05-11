@@ -41,13 +41,9 @@ const periodValue = (year: number, month: number | 'average'): number => {
 export const inflationRealInput = z
   .object({
     value: z.coerce.number().positive(),
-
     startYear: z.coerce.number().int(),
-
     startMonth: z.union([z.literal('average'), z.coerce.number().int().min(1).max(12)]),
-
     endYear: z.coerce.number().int(),
-
     endMonth: z.union([z.literal('average'), z.coerce.number().int().min(1).max(12)]),
   })
 
@@ -81,7 +77,7 @@ export const inflationRealInput = z
 
 export const inflationCustomInput = z.object({
   value: z.coerce.number().positive(),
-  interestRate: z.coerce.number().nonnegative(),
+  inflationRate: z.coerce.number().nonnegative(),
   years: z.coerce.number().nonnegative(),
   type: z.enum(['forward', 'backward']),
 })

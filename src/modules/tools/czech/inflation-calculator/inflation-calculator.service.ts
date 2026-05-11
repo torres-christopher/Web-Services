@@ -3,44 +3,54 @@ import type {
   InflationCustomInput,
   InflationOutput,
 } from './inflation-calculator.schema.js'
+
 import { cpiMonthly, cpiYearly } from '../../../../shared/data/tools/czech/cpi.js'
 
+// -------- Helper Functions --------------- //
+// Helper function for monthly key
+const monthlyKey = (year: number, month: number): string => {
+  return `${year}-${String(month).padStart(2, '0')}`
+}
+
+// Helper function get CPI value
+const getCpiValue = (year: number, month: number | 'average'): number => {
+  if (month === 'average') {
+    const value = cpiYearly[year]
+    if (value === undefined) {
+      throw new Error(`Missing yearly CPI data for year: ${year}`)
+    }
+    return value
+  }
+
+  const key = monthlyKey(year, month)
+  const value = cpiMonthly[key]
+
+  if (value === undefined) {
+    throw new Error(`Missing monthly CPI data for: ${key}`)
+  }
+
+  return value
+}
+
+// -------- Service Functions --------------- //
+// Real inflation calculation
 export const calculateInflationAdjustedValue = function (
   input: InflationRealInput,
 ): InflationOutput {
-  let startValue, endValue: number
-  if (input.startMonth != 'average' && input.endMonth != 'average') {
-    startValue = cpiMonthly[
-      `${input.startYear}-${input.startMonth < 10 ? '0' + input.startMonth : input.startMonth}`
-    ] as number
-    endValue = cpiMonthly[
-      `${input.endYear}-${input.endMonth < 10 ? '0' + input.endMonth : input.endMonth}`
-    ] as number
-  } else {
-    startValue =
-      input.startMonth === 'average'
-        ? cpiYearly[input.startYear]
-        : ((startValue =
-            cpiMonthly[
-              `${input.startYear}-${input.startMonth < 10 ? '0' + input.startMonth : input.startMonth}`
-            ]) as number)
-    endValue =
-      input.endMonth === 'average'
-        ? cpiYearly[input.endYear]
-        : (cpiMonthly[
-            `${input.endYear}-${input.endMonth < 10 ? '0' + input.endMonth : input.endMonth}`
-          ] as number)
-  }
+  const startValue = getCpiValue(input.startYear, input.startMonth)
+
+  const endValue = getCpiValue(input.endYear, input.endMonth)
 
   return input.value * (endValue / startValue)
 }
 
+// Custom inflation calculation
 export const calculateCustomInflation = function (input: InflationCustomInput): InflationOutput {
-  let result: number = input.value
+  const factor = (100 + input.inflationRate) / 100
+
   if (input.type === 'forward') {
-    result = result * ((100 + input.interestRate) / 100) ** input.years
-  } else {
-    result = result / ((100 + input.interestRate) / 100) ** input.years
+    return input.value * factor ** input.years
   }
-  return result
+
+  return input.value / factor ** input.years
 }
