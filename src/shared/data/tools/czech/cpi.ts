@@ -4,6 +4,11 @@
 // Formula: index[Y][M] = index[Y+1][M] / (1 + yoyRate[Y+1][M] / 100)
 // Last updated: March 2026
 
+// Last values
+export const CPI_MONTHLY_MAX = [2026, 3]
+export const CPI_YEARLY_MAX = 2025
+
+// CPI monthly
 export const cpiMonthly: Record<string, number> = {
   '1997-01': 38.2,
   '1997-02': 38.26,

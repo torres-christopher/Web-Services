@@ -5,7 +5,9 @@ import type {
 } from './inflation-calculator.schema.js'
 import { cpiMonthly, cpiYearly } from '../../../../shared/data/tools/czech/cpi.js'
 
-export const calculateRealInflation = function (input: InflationRealInput): InflationOutput {
+export const calculateInflationAdjustedValue = function (
+  input: InflationRealInput,
+): InflationOutput {
   let startValue, endValue: number
   if (input.startMonth != 'average' && input.endMonth != 'average') {
     startValue = cpiMonthly[
