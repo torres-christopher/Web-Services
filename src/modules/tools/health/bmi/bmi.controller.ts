@@ -9,7 +9,7 @@ import { bmiFaq as faq } from './bmi.faq.js'
 const tool = tools.find((t) => t.slug === 'bmi-kalkulacka')
 if (!tool) throw new Error('Tool not found: BMI kalkulačka')
 
-export const getBmi = catchAsync(async (req, res) => {
+export const getBmi = catchAsync(async (_req, res) => {
   res.render('pages/tools/health/bmi', {
     ...buildSeoMeta(tool),
     faq,

@@ -28,7 +28,7 @@ for (let i = 1; i <= 10; i++) {
 const tool = tools.find((t) => t.slug === 'json-validator')
 if (!tool) throw new Error('Tool not found: json-validator')
 
-export const getJsonValidator = catchAsync(async (req, res) => {
+export const getJsonValidator = catchAsync(async (_req, res) => {
   res.render('pages/tools/developer/json-validator', {
     ...buildSeoMeta(tool),
     wideLayout: true,

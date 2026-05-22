@@ -9,7 +9,7 @@ import { pocetZnakuFaq as faq } from './pocet-znaku.faq.js'
 const tool = tools.find((t) => t.slug === 'pocet-znaku')
 if (!tool) throw new Error('Tool not found: pocet-znaku')
 
-export const getPocetZnaku = catchAsync(async (req, res) => {
+export const getPocetZnaku = catchAsync(async (_req, res) => {
   res.render('pages/tools/text/pocet-znaku', {
     ...buildSeoMeta(tool),
     faq,
