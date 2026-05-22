@@ -25,6 +25,8 @@ export const postInflationCalculator = catchAsync(async (req, res) => {
   let result = null
   let inputValue: number | undefined
   let inputType: string | undefined
+  let inputInflationRate: number | undefined
+  let inputYears: number | undefined
   let errorMessage: string | null = null
   let status: number = 200
   const formType: string = req.body.form_id
@@ -65,6 +67,8 @@ export const postInflationCalculator = catchAsync(async (req, res) => {
       result = calculateCustomInflation(input.data)
       inputValue = input.data.value
       inputType = input.data.type
+      inputInflationRate = input.data.inflationRate
+      inputYears = input.data.years
     }
 
     // Incorrect form edge case
@@ -78,7 +82,9 @@ export const postInflationCalculator = catchAsync(async (req, res) => {
     ...buildSeoMeta(tool),
     faq,
     result,
-    inputValue: inputValue,
+    inputValue,
+    inputInflationRate,
+    inputYears,
     // What form was activated
     activeForm:
       formType === 'real_inflation'
