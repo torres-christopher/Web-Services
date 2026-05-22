@@ -48,4 +48,16 @@ export const tools: ToolsDetails[] = [
     enabled: true,
     featured: 1,
   },
+  {
+    title: 'Inflační kalkulačka',
+    description:
+      'Spočítejte, jak inflace ovlivnila hodnotu peněz v čase. Reálná česká inflace nebo vlastní sazba.',
+    path: '/ceske-nastroje/inflacni-kalkulacka',
+    slug: 'inflacni-kalkulacka',
+    icon: '📈',
+    categoryName: 'České nástroje',
+    categoryPath: '/ceske-nastoje',
+    enabled: true,
+    featured: 1,
+  },
 ]

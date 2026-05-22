@@ -883,6 +883,10 @@ code {
   padding: var(--space-8) 0 var(--space-16);
 }
 
+.tool-layout--compact {
+  padding-top: var(--space-4);
+}
+
 .tool-layout__inner {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -977,6 +981,10 @@ code {
   border-radius: var(--radius-lg);
   overflow: hidden;
   animation: slideUp 0.2s ease;
+}
+
+.tool-result--compact {
+  margin-top: var(--space-3);
 }
 
 @keyframes slideUp {
@@ -1700,12 +1708,14 @@ code {
 
 /* ── 35. Tool specific CSS ────────────────────────────────────────────── */
 
+/* ── Text  Tools  ─────────────────────────────── */
 /* ── Poček znaků ────────────────────── */
 
 .pocet-znaku-live {
   margin: var(--space-6) 0;
 }
 
+/* ── Developer Tools  ─────────────────────────────── */
 /* ── JSON validator ────────────────────── */
 
 .json-toolbar {
@@ -1842,6 +1852,7 @@ code {
   }
 }
 
+/* ── Health tools  ─────────────────────────────── */
 /* ── BMI Tool ────────────────────── */
 
 .bmi-classification {
@@ -1978,4 +1989,96 @@ code {
   color: var(--c-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+
+/* ── Czech tools  ─────────────────────────────── */
+/* Inflation calculator */
+
+.inflation-section {
+  padding: var(--space-6) 0;
+}
+
+.inflation-section__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.inflation-section__desc {
+  font-size: var(--text-sm);
+  color: var(--c-text-muted);
+  max-width: 640px;
+  line-height: 1.7;
+  margin-bottom: var(--space-2);
+}
+
+.inflation-form {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.inflation-form__actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.inflation-divider {
+  border: none;
+  border-top: 1px solid var(--c-border);
+  margin: 0;
+}
+
+.inflation-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) 0 var(--space-6);
+  gap: var(--space-2);
+}
+ 
+.inflation-result__value {
+  font-family: var(--font-display);
+  font-size: var(--text-6xl);
+  font-weight: 800;
+  color: var(--c-text);
+  line-height: 1;
+}
+ 
+.inflation-result__label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+ 
+.inflation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-4);
+  font-size: var(--text-base);
+}
+ 
+.inflation-table tr {
+  border-top: 1px solid var(--c-border);
+}
+ 
+.inflation-table td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--c-text-muted);
+}
+ 
+.inflation-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+  color: var(--c-text);
+  font-family: var(--font-display);
+}
+ 
+.inflation-table tr:last-child {
+  border-bottom: 1px solid var(--c-border);
 }

@@ -15,7 +15,7 @@ import { prevodVelikostiZnakuFaq as faq } from './prevod-velikosti-znaku.faq.js'
 const tool = tools.find((t) => t.slug === 'prevod-velikosti-znaku')
 if (!tool) throw new Error('Tool not found: prevod-velikosti-znaku')
 
-export const getPrevodVelikostiZnaku = catchAsync(async (req, res) => {
+export const getPrevodVelikostiZnaku = catchAsync(async (_req, res) => {
   res.render('pages/tools/text/prevod-velikosti-znaku', {
     ...buildSeoMeta(tool),
     faq,
