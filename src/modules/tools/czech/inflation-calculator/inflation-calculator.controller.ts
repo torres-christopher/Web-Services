@@ -1,7 +1,7 @@
 import { catchAsync } from '../../../../shared/utils/catchAsync.js'
 import { buildSeoMeta } from '../../../../shared/utils/seoMeta.js'
 import { tools } from '../../../../shared/data/tools.js'
-import { inflationRealInput } from './inflation-calculator.schema.js'
+import { inflationRealInput, inflationCustomInput } from './inflation-calculator.schema.js'
 import {
   calculateInflationAdjustedValue,
   calculateCustomInflation,
@@ -9,11 +9,11 @@ import {
 import { inflationCalculatorFaq as faq } from './inflation-calculator.faq.js'
 
 // Get tool details
-const tool = tools.find((t) => t.slug === 'inflation-calculator')
-if (!tool) throw new Error('Tool not found: inflation-calculator')
+const tool = tools.find((t) => t.slug === 'inflacni-kalkulacka')
+if (!tool) throw new Error('Tool not found: inflacni-kalkulacka')
 
 // GET
-export const getInflationCalculator = catchAsync(async (req, res) => {
+export const getInflationCalculator = catchAsync(async (_req, res) => {
   res.render('pages/tools/czech/inflation-calculator', {
     ...buildSeoMeta(tool),
     faq,
@@ -27,7 +27,7 @@ export const postInflationCalculator = catchAsync(async (req, res) => {
   let status: number = 200
   const formType: string = req.body.form_id
 
-  // Validate input
+  // Inflation from real indexes
   if (formType === 'real_inflation') {
     const input = inflationRealInput.safeParse({
       value: req.body.value,
@@ -37,28 +37,38 @@ export const postInflationCalculator = catchAsync(async (req, res) => {
       endMonth: req.body.endMonth,
     })
 
+    // Validate input
     if (!input.success) {
-      errorMessage = 'Real inflation wrong (placeholder)'
+      errorMessage = 'Zadány neplatné hodnoty.'
       status = 400
+    } else {
+      result = calculateInflationAdjustedValue(input.data)
     }
 
-    result = calculateInflationAdjustedValue(input.data)
-  } else {
-    const input = inflationRealInput.safeParse({
+    // Inflation by custom interpreter
+  } else if (formType === 'custom_inflation') {
+    const input = inflationCustomInput.safeParse({
       value: req.body.value,
       inflationRate: req.body.inflationRate,
       years: req.body.years,
       type: req.body.type,
     })
 
+    // Validate input
     if (!input.success) {
-      errorMessage = 'Custom inflation wrong (placeholder)'
+      errorMessage = 'Zadány neplatné hodnoty.'
       status = 400
+    } else {
+      result = calculateCustomInflation(input.data)
     }
 
-    result = calculateCustomInflation(input.data)
+    // Incorrect form edge case
+  } else {
+    errorMessage = 'Vyskytla se chyba'
+    status = 400
   }
 
+  // Render page
   res.status(status).render('pages/tools/czech/inflation-calculator', {
     ...buildSeoMeta(tool),
     faq,
