@@ -1,3 +1,4 @@
+// Tool details tools.ts file
 export interface ToolsDetails {
   title: string
   description: string

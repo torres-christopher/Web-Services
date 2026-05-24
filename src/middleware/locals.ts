@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import { env } from '../config/env.js'
 
+// So the app has locally saved default data
 export const localsMiddleware = (_req: Request, res: Response, next: NextFunction): void => {
   res.locals.siteName = env.SITE_NAME
   res.locals.siteUrl = env.SITE_URL
