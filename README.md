@@ -182,7 +182,7 @@ cp .env.example .env
 npm run dev
 ```
 
-The server runs at `http://localhost:3000`.
+The server runs at `http://tools-haven.com`.
 
 ---
 
@@ -212,10 +212,10 @@ See `.env.example` for the full list:
 
 ```bash
 NODE_ENV=development
-PORT=3000
-SITE_URL=http://localhost:3000
-SITE_NAME=Web Services
-GA_MEASUREMENT_ID=        # Google Tag Manager — leave empty for local dev
+PORT=8080
+SITE_URL=http://tools-haven.com
+SITE_NAME=Tools Haven
+GTM_CONTAINER_ID=         # Google Tag Manager — leave empty for local dev
 ADSENSE_CLIENT_ID=        # Google AdSense — leave empty for local dev
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX=100
