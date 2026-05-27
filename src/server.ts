@@ -12,7 +12,7 @@ const server = app.listen(env.PORT, () => {
   console.log(`
   ┌─────────────────────────────────────────┐
   │                                         │
-  │   Web Services running                  │
+  │   Tools Haven running                   │
   │                                         │
   │   Local:  ${pad(url, 30)}│
   │   Env:    ${pad(nodeEnv, 30)}│
