@@ -34,14 +34,32 @@ const limiter = rateLimit({
 // Run app
 const app = express()
 
-// Trust proxy headers (for codespaces)
+// Trust proxy headers (for codespaces and Roští.cz)
 app.set('trust proxy', 1)
 
-// TODO: Whitelisting for sources when adding external libraries and GA/GTM/AdSense
 // Helmet for security in headers
 app.use(
   helmet({
-    contentSecurityPolicy: false,
+    contentSecurityPolicy:
+      env.NODE_ENV === 'development' // Disable for development
+        ? false
+        : {
+            directives: {
+              'default-src': ["'self'"],
+              'script-src': [
+                "'self'",
+                'cdnjs.cloudflare.com',
+                'www.googletagmanager.com',
+                'pagead2.googlesyndication.com',
+                (_req, res) => `'nonce-${(res as express.Response).locals.nonce}'`, // Cast as response otherwise it does not recognise locals
+              ],
+              'style-src': ["'self'", 'fonts.googleapis.com'],
+              'font-src': ["'self'", 'fonts.gstatic.com'],
+              'connect-src': ["'self'", 'www.google-analytics.com', 'analytics.google.com'],
+              'frame-src': ["'self'", 'www.googletagmanager.com'],
+              'img-src': ["'self'", 'pagead2.googlesyndication.com', 'googleads.g.doubleclick.net'],
+            },
+          },
   }),
 )
 

@@ -30,7 +30,7 @@ html(lang='cs')
     link(rel='stylesheet' href='/css/main.css')
 
     //- Consent Mode v2 defaults, fires before GTM loads
-    script.
+    script(nonce=nonce).
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('consent', 'default', {
@@ -43,7 +43,7 @@ html(lang='cs')
 
     //- Google Tag Manager --> loads immediately, consent controls what fires
     if gtmContainerId
-      script.
+      script(nonce=nonce).
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
