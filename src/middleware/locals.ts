@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express'
 import { env } from '../config/env.js'
+import { randomBytes } from 'crypto'
 
 // So the app has locally saved default data
 export const localsMiddleware = (_req: Request, res: Response, next: NextFunction): void => {
@@ -9,5 +10,6 @@ export const localsMiddleware = (_req: Request, res: Response, next: NextFunctio
   res.locals.gtmContainerId = env.GTM_CONTAINER_ID
   res.locals.adsenseClientId = env.ADSENSE_CLIENT_ID
   res.locals.NODE_ENV = env.NODE_ENV
+  res.locals.nonce = randomBytes(16).toString('base64')
   next()
 }
